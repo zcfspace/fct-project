@@ -1,6 +1,6 @@
-export default function Header() {
+export default function Navbar() {
   return (
-    <header aria-label="Site Header" className="shadow-sm">
+    <header aria-label="Site Header" className="shadow-sm" id="header">
       <div className="mx-auto max-w-screen-xl p-4">
         <div className="flex items-center justify-between gap-4 lg:gap-10">
           <div className="flex lg:w-0 lg:flex-1">
@@ -17,7 +17,7 @@ export default function Header() {
             <a className="text-gray-500" href="/carta">
               Carta
             </a>
-            <a className="text-gray-500" href="/sobre">
+            <a className="text-gray-500" href="/reserva">
               Reserva
             </a>
             <a className="text-gray-500" href="/blog">

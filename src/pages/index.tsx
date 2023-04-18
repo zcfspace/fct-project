@@ -1,6 +1,11 @@
-import React from "react";
-import Header from "../components/Header";
+import Layout from '../components/layout'
 
-export default function Home() {
-  return <Header />;
+const Home: React.FC = () => {
+  return (
+    <Layout>
+      <h1>Home Page</h1>
+    </Layout>
+  )
 }
+
+export default Home
