@@ -1,11 +1,11 @@
 import Layout from '../components/Frontend/layout'
 
-const Home: React.FC = () => {
+const Reserva: React.FC = () => {
   return (
     <Layout>
-      <h1>Home Page</h1>
+      <h1>Reserva Page</h1>
     </Layout>
   )
 }
 
-export default Home
+export default Reserva

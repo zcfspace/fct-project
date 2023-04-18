@@ -1,7 +1,11 @@
-export default function Contacto() {
-    return (
-        <div>
-            <h1>Contacto</h1>
-        </div>
-    )
+import Layout from '../components/Frontend/layout'
+
+const Contacto: React.FC = () => {
+  return (
+    <Layout>
+      <h1>Contacto Page</h1>
+    </Layout>
+  )
 }
+
+export default Contacto
