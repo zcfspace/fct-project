@@ -1,13 +1,13 @@
 export default function Katering() {
   return (
-    <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
+    <section className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center mb-16">
       <div className="p-8 md:p-12 lg:px-16 lg:py-24">
         <div className="mx-auto max-w-xl text-center sm:text-left">
           <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
             Servicio Catering
           </h2>
 
-          <p className="hidden text-gray-500 md:mt-4 md:block">
+          <p className="text-gray-500 md:mt-4 md:block">
             Planeando una fiesta o reunión? Deja que nuestro servicio de
             catering de comida china se encargue de todo. ¡Reserva ahora y
             disfruta de una experiencia culinaria única!

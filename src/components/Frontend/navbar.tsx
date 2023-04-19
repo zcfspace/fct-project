@@ -4,7 +4,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-screen-xl p-4">
         <div className="flex items-center justify-between gap-4 lg:gap-10">
           <div className="flex lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="sr-only">Logo</span>
               <span className="inline-block h-10 w-32 rounded-lg bg-gray-200"></span>
             </a>
