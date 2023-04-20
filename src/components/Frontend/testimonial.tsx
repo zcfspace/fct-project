@@ -3,7 +3,7 @@ import Star from "./star";
 export default function Testimonial() {
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-8 lg:px-8">
+      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-8 lg:px-14">
         <h2 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
           Experiencias de nuestros clientes
         </h2>

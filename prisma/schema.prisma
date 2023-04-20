@@ -1,0 +1,55 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model gategory {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  slug String
+  food food[]
+}
+
+model food {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       Int
+  description String
+  image       String
+  gategoryId  String   @db.ObjectId
+  gategory    gategory @relation(fields: [gategoryId], references: [id])
+  order       order[]
+}
+
+model customer {
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  email   String
+  address String
+  phone   String
+  booking booking[]
+}
+
+model booking {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  date       DateTime
+  hour       Int
+  num_person Int
+  status     String
+  customerId String   @db.ObjectId
+  customer   customer @relation(fields: [customerId], references: [id])
+  order      order[]
+}
+
+model order {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  bookingId String   @db.ObjectId
+  booking   booking  @relation(fields: [bookingId], references: [id])
+  foodId    String   @db.ObjectId
+  food      food     @relation(fields: [foodId], references: [id])
+  status    String
+}
