@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Banner() {
   return (
@@ -21,7 +20,7 @@ export default function Banner() {
 
           <div className="mt-8 flex flex-wrap gap-4 text-center">
             <Link
-              href="./reserva"
+              href="/reserva"
               className="block w-full rounded bg-green-500 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-600 focus:outline-none focus:ring active:bg-green-500 sm:w-auto"
             >
               Reservar
@@ -29,11 +28,11 @@ export default function Banner() {
           </div>
         </div>
         <div className="mt-12 sm:mt-16 lg:mt-0 lg:ml-16 lg:flex-1 lg:pl-8">
-          <Image
+          <img
             alt="banner"
-            src="./Image/banner.png"
+            src="./img/banner.png"
             className="hidden lg:block"
-          ></Image>
+          ></img>
         </div>
       </div>
     </section>
