@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function apiTest() {
   return (
     <div>
@@ -11,10 +13,10 @@ export default function apiTest() {
       <p>Seccion</p>
       <iframe src="/api/examples/session" />
       <button>
-        <a href="/api/auth/signout">Sign Out</a>
+        <Link href="/api/auth/signout">Sign Out</Link>
       </button>
       <button>
-        <a href="/api/auth/signin">Sign In</a>
+        <Link href="/api/auth/signin">Sign In</Link>
       </button>
     </div>
   );
