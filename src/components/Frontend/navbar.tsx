@@ -1,40 +1,43 @@
+import Link from "next/link";
+import Image from "next/image";
+
 export default function Navbar() {
   return (
     <header aria-label="Site Header" className="shadow-sm" id="header">
       <div className="mx-auto max-w-screen-xl p-4">
         <div className="flex items-center justify-between gap-4 lg:gap-10">
           <div className="flex lg:w-0 lg:flex-1">
-            <a href="/">
+            <Link href="/">
               <span className="sr-only">Logo</span>
               <span className="inline-block h-10 w-32 rounded-lg bg-gray-200"></span>
-            </a>
+            </Link>
           </div>
 
           <nav
             aria-label="Site Nav"
             className="hidden gap-8 text-sm font-medium md:flex"
           >
-            <a className="text-gray-500" href="/carta">
+            <Link className="text-gray-500" href="/reserva">
               Carta
-            </a>
-            <a className="text-gray-500" href="/reserva">
+            </Link>
+            <Link className="text-gray-500" href="/reserva">
               Reserva
-            </a>
-            <a className="text-gray-500" href="/blog">
+            </Link>
+            <Link className="text-gray-500" href="/blog">
               Blog
-            </a>
-            <a className="text-gray-500" href="/contacto">
+            </Link>
+            <Link className="text-gray-500" href="/contacto">
               Contacto
-            </a>
+            </Link>
           </nav>
 
           <div className="hidden flex-1 items-center justify-end gap-4 sm:flex">
-            <a
-              className="rounded-lg bg-green-500 px-5 py-2 text-sm font-medium text-white"
-              href=""
+            <Link
+              className="rounded-lg bg-green-500 transition hover:bg-green-600 px-5 py-2 text-sm font-medium text-white"
+              href="/reserva"
             >
               Reservar
-            </a>
+            </Link>
           </div>
 
           <div className="lg:hidden">

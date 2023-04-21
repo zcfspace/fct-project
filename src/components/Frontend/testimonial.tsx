@@ -1,18 +1,19 @@
 import Star from "./star";
+import Image from "next/image";
 
 export default function Testimonial() {
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-8 lg:px-14">
+      <div className="mx-auto max-w-screen-xl sm:p-14 p-4">
         <h2 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
           Experiencias de nuestros clientes
         </h2>
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
           <blockquote className="rounded-lg bg-gray-100 p-8">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 alt="testimonialUser"
-                src="./img/user.png"
+                src="./Image/user.png"
                 className="h-16 w-16 rounded-full object-cover"
               />
               <div>
@@ -29,9 +30,9 @@ export default function Testimonial() {
 
           <blockquote className="rounded-lg bg-gray-100 p-8">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 alt="testimonialUser"
-                src="./img/user.png"
+                src="./Image/user.png"
                 className="h-16 w-16 rounded-full object-cover"
               />
               <div>
@@ -48,9 +49,9 @@ export default function Testimonial() {
 
           <blockquote className="rounded-lg bg-gray-100 p-8">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 alt="testimonialUser"
-                src="./img/user.png"
+                src="./Image/user.png"
                 className="h-16 w-16 rounded-full object-cover"
               />
               <div>

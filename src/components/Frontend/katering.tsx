@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Image from "next/image";
+
 export default function Katering() {
   return (
     <section className="mx-auto max-w-screen-xl overflow-hidden sm:grid sm:grid-cols-2 sm:items-center mb-16">
@@ -14,19 +17,19 @@ export default function Katering() {
           </p>
 
           <div className="mt-4 md:mt-8">
-            <a
-              href="#"
-              className="inline-block rounded bg-green-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring focus:ring-yellow-400"
+            <Link
+              href="./reserva"
+              className="inline-block rounded bg-green-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-green-700"
             >
               Reservar
-            </a>
+            </Link>
           </div>
         </div>
       </div>
 
-      <img
+      <Image
         alt="katering_img"
-        src="./img/katering.jpg"
+        src="./Image/katering.jpg"
         className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-tl-[30px] md:h-[calc(100%_-_4rem)] md:rounded-tl-[60px] sm:pr-14"
       />
     </section>

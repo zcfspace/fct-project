@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Image from "next/image";
+
 export default function Banner() {
   return (
     <section>
@@ -17,20 +20,20 @@ export default function Banner() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4 text-center">
-            <a
-              href="#"
+            <Link
+              href="./reserva"
               className="block w-full rounded bg-green-500 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-600 focus:outline-none focus:ring active:bg-green-500 sm:w-auto"
             >
               Reservar
-            </a>
+            </Link>
           </div>
         </div>
         <div className="mt-12 sm:mt-16 lg:mt-0 lg:ml-16 lg:flex-1 lg:pl-8">
-          <img
+          <Image
             alt="banner"
-            src="./img/banner.png"
+            src="./Image/banner.png"
             className="hidden lg:block"
-          ></img>
+          ></Image>
         </div>
       </div>
     </section>

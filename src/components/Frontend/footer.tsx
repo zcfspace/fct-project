@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer aria-label="Site Footer" className="bg-gray-100">
-      <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
+      <div className="relative mx-auto max-w-screen-xl sm:p-14 p-4">
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8">
-          <a
+          <Link
             className="inline-block rounded-full bg-green-500 p-2 text-white shadow transition hover:bg-green-600 sm:p-3 lg:p-4"
             href="#header"
           >
@@ -21,16 +23,16 @@ export default function Footer() {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
         </div>
 
         <div className="lg:flex lg:items-end lg:justify-between">
           <div>
             <div className="flex justify-center text-green-600 lg:justify-start">
-              <a href="#">
+              <Link href="#">
                 <span className="sr-only">Logo</span>
                 <span className="inline-block h-10 w-32 rounded-lg bg-gray-200"></span>
-              </a>
+              </Link>
             </div>
 
             <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 lg:text-left">
@@ -42,39 +44,39 @@ export default function Footer() {
           <nav aria-label="Footer Nav" className="mt-12 lg:mt-0">
             <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12">
               <li>
-                <a
+                <Link
                   className="text-gray-700 transition hover:text-gray-700/75"
                   href="/carta"
                 >
                   Carta
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   className="text-gray-700 transition hover:text-gray-700/75"
                   href="/reserva"
                 >
                   Reserva
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   className="text-gray-700 transition hover:text-gray-700/75"
                   href="/blog"
                 >
                   Blog
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   className="text-gray-700 transition hover:text-gray-700/75"
                   href="/contacto"
                 >
                   Contacto
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
