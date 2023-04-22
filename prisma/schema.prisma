@@ -7,31 +7,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model gategory {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  slug String
-  food food[]
+model category {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  slug  String
+  foods food[]
 }
 
 model food {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  price       Int
-  description String
-  image       String
-  gategoryId  String   @db.ObjectId
-  gategory    gategory @relation(fields: [gategoryId], references: [id])
-  order       order[]
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  price      Int
+  image      String
+  categoryId String   @db.ObjectId
+  category   category @relation(fields: [categoryId], references: [id])
+  orderId    String?  @db.ObjectId
+  order      order?   @relation(fields: [orderId], references: [id])
 }
 
 model customer {
-  id      String    @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
-  email   String
-  address String
-  phone   String
-  booking booking[]
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String
+  address  String?
+  phone    String
+  bookings booking[]
 }
 
 model booking {
@@ -39,17 +39,19 @@ model booking {
   date       DateTime
   hour       Int
   num_person Int
-  status     String
+  status     String   @default("pending")
   customerId String   @db.ObjectId
   customer   customer @relation(fields: [customerId], references: [id])
-  order      order[]
 }
 
 model order {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  bookingId String   @db.ObjectId
-  booking   booking  @relation(fields: [bookingId], references: [id])
-  foodId    String   @db.ObjectId
-  food      food     @relation(fields: [foodId], references: [id])
-  status    String
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  bookingId String @db.ObjectId
+  foods     food[]
+}
+
+model admin {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  password String
 }
