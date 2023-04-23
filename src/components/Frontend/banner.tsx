@@ -27,7 +27,7 @@ export default function Banner() {
             </Link>
           </div>
         </div>
-        <div className="mt-12 sm:mt-16 lg:mt-0 lg:ml-16 lg:flex-1 lg:pl-8">
+        <div className="mt-12 sm:mt-16 lg:mt-0 lg:ml-16 lg:flex-1 lg:pl-8 pointer-events-none">
           <img
             alt="banner"
             src="./img/banner.png"

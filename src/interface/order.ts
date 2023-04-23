@@ -5,5 +5,5 @@ export interface IOrder {
   _id: string;
   food: IFood[];
   book: IBooking;
-  status: string; // "pending" | "confirmed" | "cancelled" | "done";
+  status: string; 
 }
