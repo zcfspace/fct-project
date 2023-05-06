@@ -32,6 +32,7 @@ export const authOptions: AuthOptions = {
           credentials.password,
           admin.password
         );
+        
         if (!isCorrectPassword) {
           throw new Error("Contraseña incorrecta");
         }

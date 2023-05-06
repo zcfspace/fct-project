@@ -17,6 +17,8 @@ const schema = yup.object().shape({
 
 export default function LoginForm() {
 
+    const router = useRouter();
+
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema),
     });
@@ -30,7 +32,6 @@ export default function LoginForm() {
             .then((callback) => {
 
                 if (callback?.ok) {
-                    const router = useRouter();
                     router.push('/admin/dashboard');
                 }
                 if (callback?.error) {
