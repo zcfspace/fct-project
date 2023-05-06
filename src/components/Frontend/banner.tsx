@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Banner() {
   return (
@@ -28,11 +29,13 @@ export default function Banner() {
           </div>
         </div>
         <div className="mt-12 sm:mt-16 lg:mt-0 lg:ml-16 lg:flex-1 lg:pl-8 pointer-events-none">
-          <img
+          <Image
             alt="banner"
-            src="./img/banner.png"
+            src="/img/banner.png"
             className="hidden lg:block"
-          ></img>
+            width={600}
+            height={600}
+          />
         </div>
       </div>
     </section>

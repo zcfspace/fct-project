@@ -1,4 +1,5 @@
 import Star from "./star";
+import Image from "next/image";
 
 export default function Testimonial() {
   return (
@@ -10,10 +11,12 @@ export default function Testimonial() {
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
           <blockquote className="rounded-lg bg-gray-100 p-8">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 alt="testimonialUser"
-                src="./img/user.png"
+                src="/img/user.png"
                 className="h-16 w-16 rounded-full object-cover"
+                height={64}
+                width={64}
               />
               <div>
                 <Star />
@@ -29,10 +32,12 @@ export default function Testimonial() {
 
           <blockquote className="rounded-lg bg-gray-100 p-8">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 alt="testimonialUser"
-                src="./img/user.png"
+                src="/img/user.png"
                 className="h-16 w-16 rounded-full object-cover"
+                height={64}
+                width={64}
               />
               <div>
                 <Star />
@@ -48,10 +53,12 @@ export default function Testimonial() {
 
           <blockquote className="rounded-lg bg-gray-100 p-8">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 alt="testimonialUser"
-                src="./img/user.png"
+                src="/img/user.png"
                 className="h-16 w-16 rounded-full object-cover"
+                height={64}
+                width={64}
               />
               <div>
                 <Star />
