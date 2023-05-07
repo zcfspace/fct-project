@@ -4,10 +4,9 @@ import Layout from '@/components/Backend/layout';
 function DashboardPage() {
   return (
     <Layout>
-      <div className='mb-96'>
+      <div >
         <h1>Dashboard</h1>
       </div>
-      <p className='pt-96'>HOLA ...</p>
     </Layout>
   )
 }

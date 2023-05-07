@@ -52,7 +52,7 @@ export default function LoginForm() {
                 <div>
                     <label htmlFor="username" className="block text-gray-700 font-semibold ">Usuario</label>
                     <input id="username" {...register('username')} className="border p-2 w-full rounded" />
-                    {errors.username && <p className="text-red-500">Debe ser un correo electrónico válido</p>}
+                    {errors.username && <p className="text-red-500">Debes introducir un usuario</p>}
                 </div>
 
                 <div className="mt-4">
