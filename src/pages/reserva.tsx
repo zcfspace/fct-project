@@ -1,5 +1,5 @@
 import Layout from "@/components/Frontend/layout"
-import ReservationForm from "@/components/Frontend/reservationForm"
+import ReservationForm from "@/components/Frontend/reservationCalendarForm"
 
 const Reserva: React.FC = () => {
   return (
