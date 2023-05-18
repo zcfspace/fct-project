@@ -6,6 +6,7 @@ const Reserva: React.FC = () => {
     <Layout>
       <ReservationForm />
     </Layout>
+    
   )
 }
 
