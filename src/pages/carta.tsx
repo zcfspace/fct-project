@@ -1,5 +1,5 @@
 import Layout from "../components/Frontend/layout";
-import { getAllFoods } from "../libs/food";
+import { getAllFoods } from "./api/food";
 import Image from "next/image";
 import { useState } from "react";
 interface Food {

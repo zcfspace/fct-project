@@ -1,15 +1,9 @@
-// import type { NextApiRequest, NextApiResponse } from "next";
-// import prisma from "../../libs/prismadb";
+import { PrismaClient } from "@prisma/client";
 
-// export default async function POST(req: NextApiRequest, res: NextApiResponse) {
-//   const { name, description, price, image } = req.body;
-//   const food = await prisma.food.create({
-//     data: {
-//       name,
-//       description,
-//       price,
-//       image,
-//     },
-//   });
-//   res.json(food);
-// }
+const prisma = new PrismaClient();
+
+export async function getAllFoods() {
+  const foods = await prisma.food.findMany();
+  return foods;
+}
+

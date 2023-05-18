@@ -56,15 +56,14 @@ model admin {
   password String
 }
 
-//Esto es para prueba 
-// model reservation {
-//   id          String @id @default(auto()) @map("_id") @db.ObjectId
-//   dateTime    DateTime
-//   numPersons  Int
-//   name        String
-//   phone       String
-//   email       String
-//   address     String?
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-// }
+model reservation {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  dateTime    DateTime
+  numPersons  Int
+  name        String
+  phone       String
+  email       String
+  address     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

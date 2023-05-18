@@ -1,9 +1,10 @@
-import Layout from '../components/Frontend/layout'
+import Layout from "@/components/Frontend/layout"
+import ReservationForm from "@/components/Frontend/reservationForm"
 
 const Reserva: React.FC = () => {
   return (
     <Layout>
-      <h1>Reserva Page</h1>
+      <ReservationForm />
     </Layout>
   )
 }
