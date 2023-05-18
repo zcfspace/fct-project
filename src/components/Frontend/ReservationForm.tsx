@@ -6,7 +6,7 @@ import Calendar from 'react-calendar';
 type FormValues = {
 	date: Date;
 	time: string;
-	numPersonas: string;
+	numPersons: string;
 	name: string;
 	lastName: string;
 	email: string;
@@ -67,8 +67,8 @@ function ReservationForm() {
 							))}
 						</select>
 
-						<label htmlFor="numPersonas" className="mb-1 text font-medium text-gray-500">Número de personas:</label>
-						<select {...register('numPersonas')} id="numPersonas"
+						<label htmlFor="numPersons" className="mb-1 text font-medium text-gray-500">Número de personas:</label>
+						<select {...register('numPersons')} id="numPersons"
 							className="mb-2 bg-gray-100 border border-gray-300 text-gray-500 text rounded-lg focus:ring-green-500 focus:border-green-500  w-64 p-2.5" value={selectedNumPersonas} onChange={(e) => setSelectedNumPersonas(e.target.value)}>
 							<option value="">Seleccione</option>
 							{Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
@@ -86,11 +86,9 @@ function ReservationForm() {
 									? "bg-gray-500 text-white cursor-not-allowed"
 									: "bg-green-500 text-white"
 									}`}
-								disabled={!date || !selectedTime || !selectedNumPersonas}
-							>
+								disabled={!date || !selectedTime || !selectedNumPersonas}>
 								Continuar
 							</button>
-
 						)}
 					</div>
 				</form>
@@ -144,7 +142,7 @@ export default ReservationForm;
 // type FormValues = {
 // 	date: Date;
 // 	time: string;
-// 	numPersonas: string;
+// 	numPersons: string;
 // 	name: string;
 // 	lastName: string;
 // 	email: string;
@@ -198,8 +196,8 @@ export default ReservationForm;
 // 							))}
 // 						</select>
 
-// 						<label htmlFor="numPersonas" className="mb-2">Número de personas:</label>
-// 						<select {...register('numPersonas')} id="numPersonas" className="mb-4">
+// 						<label htmlFor="numPersons" className="mb-2">Número de personas:</label>
+// 						<select {...register('numPersons')} id="numPersons" className="mb-4">
 // 							<option value="">Seleccione</option>
 // 							{Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
 // 								<option key={num} value={num}>

@@ -57,13 +57,14 @@ model admin {
 }
 
 model reservation {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  dateTime    DateTime
-  numPersons  Int
-  name        String
-  phone       String
-  email       String
-  address     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  date       DateTime
+  time       String
+  numPersons Int
+  name       String
+  lastName   String
+  email      String
+  phone      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
