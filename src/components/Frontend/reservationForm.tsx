@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 import Calendar from 'react-calendar';
+import axios from 'axios';
+import { Toaster, toast } from 'sonner'
 
 type FormValues = {
 	date: Date;
@@ -21,8 +23,26 @@ function ReservationForm() {
 	const [selectedNumPersonas, setSelectedNumPersonas] = useState('');
 	const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormValues>();
 
-	const onSubmit: SubmitHandler<FormValues> = data => {
-		console.log(data);
+	const onSubmit: SubmitHandler<FormValues> = async data => {
+		try {
+			const response = await axios.post('/api/reservation/createReservation', data);
+			console.log(response.data);
+
+			toast.success(`Reserva creada para el ${date?.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} a las ${selectedTime} para ${selectedNumPersonas} personas`, {
+				duration: Infinity,
+
+			});
+
+			setDate(null);
+			setSelectedTime('');
+			setSelectedNumPersonas('');
+			setShowPersonalInfo(false);
+			setShowForm(true);
+
+		} catch (error) {
+			console.error('Error al crear la reserva:', error);
+			toast.error('Error al crear la reserva');
+		}
 	};
 
 	const handleDateChange = (value: Date | Date[]) => {
@@ -44,6 +64,7 @@ function ReservationForm() {
 
 	return (
 		<div className="mt-12 mb-14">
+			<Toaster richColors closeButton position="top-right" />
 			{showForm && (
 				<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row justify-center items-center transition">
 					<div className="md:mr-10">
@@ -99,27 +120,27 @@ function ReservationForm() {
 					<div className="grid gap-6 mb-6 md:grid-cols-2">
 						<div>
 							<label htmlFor="name" className='block mb-2 font-medium text-gray-500'>Nombre:</label>
-							<input  {...register('name', { required: true })} id="name" className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' />
+							<input  {...register('name', { required: true })} id="name" placeholder='Nombre' className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' />
 							{errors.name && <p className='text-red-500 font-medium'>Este campo es obligatorio</p>}
 						</div>
 
 						<div>
 							<label htmlFor="lastName" className='block mb-2 font-medium text-gray-500'>Apellido:</label>
-							<input {...register('lastName', { required: true })} id="lastName" className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' />
+							<input {...register('lastName', { required: true })} id="lastName" placeholder='Apellido' className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' />
 							{errors.lastName && <p className='text-red-500 font-medium'>Este campo es obligatorio</p>}
 						</div>
 					</div>
 
 					<div className="mb-6">
 						<label htmlFor="email" className='block mb-2 font-medium text-gray-500'>Email:</label>
-						<input {...register('email', { required: true, pattern: /^\S+@\S+$/i })} className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' id="email" type="email" />
+						<input {...register('email', { required: true, pattern: /^\S+@\S+$/i })} placeholder='example@gmail.com' className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' id="email" type="email" />
 						{errors.email && <p className='text-red-500 font-medium'>Por favor, introduce un email válido</p>}
 
 					</div>
 
 					<div className="mb-6">
 						<label htmlFor="phone" className='block mb-2 font-medium text-gray-500'>Teléfono:</label>
-						<input {...register('phone', { required: true, pattern: /^[0-9]{9}$/ })} className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' id="phone" type="tel" />
+						<input {...register('phone', { required: true, pattern: /^[0-9]{9}$/ })} placeholder='Teléfono' className='bg-gray-100 border text-gray-500 text rounded-lg block w-full p-2.5 focus:ring-green-500 focus:border-green-500' id="phone" type="tel" />
 						{errors.phone && <p className='text-red-500 font-medium'>Por favor, introduce número de teléfono válido (9 dígitos)</p>}
 					</div>
 
@@ -158,7 +179,7 @@ export default ReservationForm;
 // 	const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormValues>();
 
 // 	const onSubmit: SubmitHandler<FormValues> = data => {
-// 		// Aquí puedes enviar los datos a tu base de datos
+// 		Aquí puedes enviar los datos a tu base de datos
 // 		console.log(data);
 // 	};
 
