@@ -25,7 +25,7 @@ function ReservationForm() {
 
 	const onSubmit: SubmitHandler<FormValues> = async data => {
 		try {
-			const response = await axios.post('/api/reservation/createReservation', data);
+			const response = await axios.post('/api/reservation/post', data);
 			console.log(response.data);
 
 			toast.success(`Reserva creada para el ${date?.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} a las ${selectedTime} para ${selectedNumPersonas} personas`, {

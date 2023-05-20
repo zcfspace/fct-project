@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
 import Head from "next/head";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function App({
   Component,

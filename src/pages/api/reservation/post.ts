@@ -30,7 +30,6 @@ export default async function handler(
 
       res.status(201).json(reservation);
     } catch (error) {
-      console.error("Error al crear la reserva:", error); // Agrega esta línea para ver el error en el servidor
       res.status(500).json({ error: "Error al crear la reserva" });
     }
   } else {

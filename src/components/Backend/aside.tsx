@@ -50,8 +50,8 @@ export default function Aside() {
             </Link>
           </li>
           <li>
-            <Link href="/admin/dashboard/booking" className={
-              router && router.pathname === "/admin/dashboard/booking"
+            <Link href="/admin/dashboard/reservation" className={
+              router && router.pathname === "/admin/dashboard/reservation"
                 ? "relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-lime-600 to-green-400"
                 : "px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
             }>
@@ -69,7 +69,7 @@ export default function Aside() {
                 : "px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
             }>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path className="fill-current text-gray-300 group-hover:text-green-300" fill-rule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clip-rule="evenodd" />
+                <path className="fill-current text-gray-300 group-hover:text-green-300" fillRule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clipRule="evenodd" />
                 <path className="fill-current text-gray-600 group-hover:text-green-600" d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
               </svg>
               <span className="group-hover:text-gray-700">Categorías</span>
@@ -97,7 +97,7 @@ export default function Aside() {
       <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
         <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group" onClick={cerrarSesion}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 group-hover:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
           <span className="group-hover:text-gray-700">Cerrar sesión</span>
         </button>

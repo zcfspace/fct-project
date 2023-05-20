@@ -11,7 +11,6 @@ model category {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name  String
   slug  String
-  foods food[]
 }
 
 model food {
@@ -20,7 +19,6 @@ model food {
   price      Int
   image      String
   categoryId String   @db.ObjectId
-  category   category @relation(fields: [categoryId], references: [id])
   orderId    String?  @db.ObjectId
   order      order?   @relation(fields: [orderId], references: [id])
 }
