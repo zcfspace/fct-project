@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import { Toaster, toast } from 'sonner'
 import { format } from "date-fns";
 import axios from 'axios';
-
+import Link from 'next/link';
 interface Reservation {
   id: string;
   date: string;
@@ -56,14 +56,27 @@ function ReservationPage() {
   return (
     <Layout>
       <Toaster richColors closeButton position="top-right" />
-      <DatePicker
-        selected={selectedDate}
-        onChange={(date: Date | null) => setSelectedDate(date)}
-        dateFormat="yyyy-MM-dd"
-        isClearable
-        placeholderText="Selecciona una fecha"
-        className='w-full text-gray-500 shadow-md sm:rounded-lg px-6 py-3 mb-4 bg-gray-50'
-      />
+
+
+      <div className='flex'>
+        <div className='mr-3'>
+          <button className='rounded-md bg-green-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+            <Link href='/reserva'>
+              Crear reserva
+            </Link>
+          </button>
+        </div>
+        <div className='w-1/2 md:w-1/4'>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date: Date | null) => setSelectedDate(date)}
+            dateFormat="yyyy-MM-dd"
+            isClearable
+            placeholderText="Selecciona una fecha"
+            className='w-full text-gray-500 shadow-md sm:rounded-lg px-6 py-2 mb-4 bg-gray-50'
+          />
+        </div>
+      </div>
 
       <div className='overflow-x-auto shadow-md sm:rounded-lg'>
         <table className="w-full text-sm text-left text-gray-500 ">

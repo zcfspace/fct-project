@@ -14,7 +14,6 @@ function CategoryPage() {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-
     const getCategories = async () => {
       try {
         const response = await axios.get(`/api/category/get`);
@@ -27,12 +26,30 @@ function CategoryPage() {
     getCategories();
   }, []);
 
+  const deleteCategory = async (id: string) => {
+    try {
+      const response = await fetch(`/api/category/delete?id=${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setCategories(categories.filter((category) => category.id !== id));
+        toast.success('Categoría eliminada correctamente');
+      }
+    }
+    catch (error) {
+      toast.error(`Error al eliminar la categoría`);
+    }
+  };
+
+  const editCategory = (id: string) => {
+    console.log(`Editar categoría con ID: ${id}`);
+  };
+
   return (
     <Layout>
       <Toaster richColors closeButton position="top-right" />
-      <div>
-        <CreateCategory />
-      </div>
+      <CreateCategory />
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
         <table className="w-full text-sm text-left text-gray-500 ">
@@ -49,13 +66,18 @@ function CategoryPage() {
                 <td className="px-6 py-3">{category.name}</td>
                 <td className="px-6 py-3">{category.slug}</td>
                 <td className="px-6 py-3">
-                  <button className="text-green-500 mr-5">
+                  <button
+                    className="text-green-500 mr-5"
+                    onClick={() => editCategory(category.id)}>
                     Editar
                   </button>
 
-                  <button className="text-red-500"> 
+                  <button
+                    className="text-red-500"
+                    onClick={() => deleteCategory(category.id)}>
                     Eliminar
                   </button>
+
                 </td>
               </tr>
             ))}
