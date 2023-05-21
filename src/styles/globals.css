@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 .react-calendar {
-  width: 450px;
-  max-width: 100%;
+  max-width: 450px;
   background: white;
   border-radius: 15px;
   font-family: Manrope, Helvetica, sans-serif;
   line-height: 1.125em;
+  margin: 0.5rem;
 }
 
 .react-calendar__navigation {

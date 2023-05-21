@@ -55,60 +55,61 @@ function ReservationPage() {
 
   return (
     <Layout>
-      <Toaster richColors closeButton position="top-right" />
+      <div className='p-4'>
 
-
-      <div className='flex'>
-        <div className='mr-3'>
-          <button className='rounded-md bg-green-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-            <Link href='/reserva'>
-              Crear reserva
-            </Link>
-          </button>
+        <Toaster richColors closeButton position="top-right" />
+        <div className='flex'>
+          <div className='mr-3'>
+            <button className='rounded-md bg-green-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+              <Link href='/reserva'>
+                Crear reserva
+              </Link>
+            </button>
+          </div>
+          <div className='w-1/2 md:w-1/4'>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date: Date | null) => setSelectedDate(date)}
+              dateFormat="yyyy-MM-dd"
+              isClearable
+              placeholderText="Selecciona una fecha"
+              className='w-full text-gray-500 shadow-md sm:rounded-lg px-6 py-2 mb-4 bg-gray-50'
+            />
+          </div>
         </div>
-        <div className='w-1/2 md:w-1/4'>
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date: Date | null) => setSelectedDate(date)}
-            dateFormat="yyyy-MM-dd"
-            isClearable
-            placeholderText="Selecciona una fecha"
-            className='w-full text-gray-500 shadow-md sm:rounded-lg px-6 py-2 mb-4 bg-gray-50'
-          />
-        </div>
-      </div>
 
-      <div className='overflow-x-auto shadow-md sm:rounded-lg'>
-        <table className="w-full text-sm text-left text-gray-500 ">
-          <thead className='text-xs text-gray-700 uppercase bg-green-100'>
-            <tr>
-              <th scope="col" className="px-6 py-3">Fecha</th>
-              <th scope="col" className="px-6 py-3">Hora</th>
-              <th scope="col" className="px-6 py-3">Personas</th>
-              <th scope="col" className="px-6 py-3">Nombre</th>
-              <th scope="col" className="px-6 py-3">Apellido</th>
-              <th scope="col" className="px-6 py-3">Email</th>
-              <th scope="col" className="px-6 py-3">Teléfono</th>
-              <th scope="col" className="px-6 py-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reservations.map((reservation) => (
-              <tr key={reservation.id} className='hover:bg-gray-50 hover:shadow-md  even:bg-green-100 odd:bg-white'>
-                <td className="px-6 py-4">{new Date(reservation.date).toLocaleDateString()}</td>
-                <td className="px-6 py-4">{reservation.time}</td>
-                <td className="px-6 py-4">{reservation.numPersons}</td>
-                <td className="px-6 py-4">{reservation.name}</td>
-                <td className="px-6 py-4">{reservation.lastName}</td>
-                <td className="px-6 py-4">{reservation.email}</td>
-                <td className="px-6 py-4">{reservation.phone}</td>
-                <td className="px-6 py-4 text-red-500">
-                  <button onClick={() => deleteReservation(reservation.id)}>Eliminar</button>
-                </td>
+        <div className='overflow-x-auto shadow-md sm:rounded-lg'>
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className='text-xs text-gray-700 uppercase bg-green-100'>
+              <tr>
+                <th scope="col" className="px-6 py-3">Fecha</th>
+                <th scope="col" className="px-6 py-3">Hora</th>
+                <th scope="col" className="px-6 py-3">Personas</th>
+                <th scope="col" className="px-6 py-3">Nombre</th>
+                <th scope="col" className="px-6 py-3">Apellido</th>
+                <th scope="col" className="px-6 py-3">Email</th>
+                <th scope="col" className="px-6 py-3">Teléfono</th>
+                <th scope="col" className="px-6 py-3">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {reservations.map((reservation) => (
+                <tr key={reservation.id} className='hover:bg-gray-50 hover:shadow-md  even:bg-green-100 odd:bg-white'>
+                  <td className="px-6 py-4">{new Date(reservation.date).toLocaleDateString()}</td>
+                  <td className="px-6 py-4">{reservation.time}</td>
+                  <td className="px-6 py-4">{reservation.numPersons}</td>
+                  <td className="px-6 py-4">{reservation.name}</td>
+                  <td className="px-6 py-4">{reservation.lastName}</td>
+                  <td className="px-6 py-4">{reservation.email}</td>
+                  <td className="px-6 py-4">{reservation.phone}</td>
+                  <td className="px-6 py-4 text-red-500">
+                    <button onClick={() => deleteReservation(reservation.id)}>Eliminar</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );

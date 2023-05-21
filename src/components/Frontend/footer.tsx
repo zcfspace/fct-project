@@ -46,6 +46,15 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-gray-700 transition hover:text-gray-700/75"
+                  href="/"
+                >
+                  Inicio
+                </Link>
+              </li>
+              
+              <li>
+                <Link
+                  className="text-gray-700 transition hover:text-gray-700/75"
                   href="/carta"
                 >
                   Carta
@@ -58,15 +67,6 @@ export default function Footer() {
                   href="/reserva"
                 >
                   Reserva
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
-                  href="/blog"
-                >
-                  Blog
                 </Link>
               </li>
 

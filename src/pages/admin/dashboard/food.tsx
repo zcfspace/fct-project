@@ -47,47 +47,53 @@ function FoodPage() {
     }
   };
 
+  const addFood = (newFood: Food) => {
+    setFoods((prevFoods) => [...prevFoods, newFood]);
+  };
+
   return (
     <Layout>
-      <Toaster richColors closeButton position="top-right" />
-      <CreateFood />
-      <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <table className="w-full text-sm text-left text-gray-500 ">
-          <thead className="text-xs text-gray-700 uppercase bg-green-100">
-            <tr>
-              <th className="px-6 py-3">Nombre</th>
-              <th className="px-6 py-3">Precio</th>
-              <th className="px-6 py-3">Categoría</th>
-              <th className="px-6 py-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            {foods.map((food) => (
-              <tr key={food.id} className='hover:bg-gray-50 hover:shadow-md even:bg-green-100 odd:bg-white'>
-                <td className="px-6 py-3">{food.name}</td>
-                <td className="px-6 py-3">{food.price}</td>
-                <td className="px-6 py-3">{food.categoryId}</td>
-                <td className="px-6 py-3">
-                  <EditFood
-                    id={food.id}
-                    name={food.name}
-                    price={food.price}
-                    image= {food.image}
-                    categoryId={food.categoryId}
-                    onUpdate = {getFoods}
-                  />
-                  
-                  <button
-                    onClick={() => deleteCategory(food.id)}
-                    className="text-red-500">
-                    Eliminar
-                  </button>
-                </td>
+      <div className='p-4'>
+        <Toaster richColors closeButton position="top-right" />
+        <CreateFood onAddFood={addFood} />
+        <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-green-100">
+              <tr>
+                <th className="px-6 py-3">Nombre</th>
+                <th className="px-6 py-3">Precio</th>
+                <th className="px-6 py-3">Categoría</th>
+                <th className="px-6 py-3">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+
+              {foods.map((food) => (
+                <tr key={food.id} className='hover:bg-gray-50 hover:shadow-md even:bg-green-100 odd:bg-white'>
+                  <td className="px-6 py-3">{food.name}</td>
+                  <td className="px-6 py-3">{food.price}</td>
+                  <td className="px-6 py-3">{food.categoryId}</td>
+                  <td className="px-6 py-3">
+                    <EditFood
+                      id={food.id}
+                      name={food.name}
+                      price={food.price}
+                      image={food.image}
+                      categoryId={food.categoryId}
+                      onUpdate={getFoods}
+                    />
+
+                    <button
+                      onClick={() => deleteCategory(food.id)}
+                      className="text-red-500">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );

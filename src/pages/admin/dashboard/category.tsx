@@ -49,40 +49,43 @@ function CategoryPage() {
 
   return (
     <Layout>
-      <Toaster richColors closeButton position="top-right" />
-      <CreateCategory onAddCategory={addCategory} />
-      
-      <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <table className="w-full text-sm text-left text-gray-500 ">
-          <thead className="text-xs text-gray-700 uppercase bg-green-100">
-            <tr>
-              <th className="px-6 py-3">Nombre</th>
-              <th className="px-6 py-3">Slug</th>
-              <th className="px-6 py-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category) => (
-              <tr key={category.id} className='hover:bg-gray-50 hover:shadow-md even:bg-green-100 odd:bg-white'>
-                <td className="px-6 py-3">{category.name}</td>
-                <td className="px-6 py-3">{category.slug}</td>
-                <td className="px-6 py-3">
-                  <EditCategory
-                    id={category.id}
-                    name={category.name}
-                    slug={category.slug}
-                    onUpdate={getCategories}
-                  />
-                  <button
-                    className="text-red-500"
-                    onClick={() => deleteCategory(category.id)}>
-                    Eliminar
-                  </button>
-                </td>
+      <div className='p-4'>
+
+        <Toaster richColors closeButton position="top-right" />
+        <CreateCategory onAddCategory={addCategory} />
+
+        <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-green-100">
+              <tr>
+                <th className="px-6 py-3">Nombre</th>
+                <th className="px-6 py-3">Slug</th>
+                <th className="px-6 py-3">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {categories.map((category) => (
+                <tr key={category.id} className='hover:bg-gray-50 hover:shadow-md even:bg-green-100 odd:bg-white'>
+                  <td className="px-6 py-3">{category.name}</td>
+                  <td className="px-6 py-3">{category.slug}</td>
+                  <td className="px-6 py-3">
+                    <EditCategory
+                      id={category.id}
+                      name={category.name}
+                      slug={category.slug}
+                      onUpdate={getCategories}
+                    />
+                    <button
+                      className="text-red-500"
+                      onClick={() => deleteCategory(category.id)}>
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );

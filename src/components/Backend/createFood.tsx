@@ -8,8 +8,18 @@ interface Category {
 	name: string;
 	slug: string;
 }
-
-export default function FoodCategory() {
+interface Food {
+	id: string;
+	name: string;
+	price: number;
+	image: string;
+	categoryId: string;
+}
+interface CreateFoodProps {
+	onAddFood: (newFood: Food) => void;
+}
+	
+export default function FoodCategory({ onAddFood }: CreateFoodProps) {
 
 	let [isOpen, setIsOpen] = useState(false)
 
@@ -51,6 +61,8 @@ export default function FoodCategory() {
 			});
 
 			if (response.ok) {
+				const data = await response.json();
+				onAddFood(data);
 				toast.success(`Plato ${name} añadido correctamente`);
 			} else {
 				toast.error('Error al añadir el plato');

@@ -34,7 +34,7 @@ function ReservationForm() {
 			setSelectedNumPersonas('');
 			setShowPersonalInfo(false);
 			setShowForm(true);
-			
+
 		} catch (error) {
 
 			toast.error('Error al crear la reserva');
@@ -75,7 +75,7 @@ function ReservationForm() {
 					<div className="flex flex-col">
 						<label htmlFor="time" className="mb-1 text font-medium text-gray-500">Hora:</label>
 						<select {...register('time')} id="time"
-							className="mb-2 bg-gray-100 border border-gray-300 text-gray-500 text rounded-lg focus:ring-green-500 focus:border-green-500  w-64 p-2.5" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}>
+							className="mb-2 bg-gray-100 border border-gray-300 text-gray-500 text rounded-lg focus:ring-green-500 focus:border-green-500 w-96 md:w-64 p-2.5" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}>
 							<option value="">Seleccione</option>
 							{Array.from({ length: 12 }, (_, i) => i + 12).map(hour => (
 								<option key={hour} value={`${hour}:00`}>
@@ -86,7 +86,7 @@ function ReservationForm() {
 
 						<label htmlFor="numPersons" className="mb-1 text font-medium text-gray-500">Número de personas:</label>
 						<select {...register('numPersons')} id="numPersons"
-							className="mb-2 bg-gray-100 border border-gray-300 text-gray-500 text rounded-lg focus:ring-green-500 focus:border-green-500  w-64 p-2.5" value={selectedNumPersonas} onChange={(e) => setSelectedNumPersonas(e.target.value)}>
+							className="mb-2 bg-gray-100 border border-gray-300 text-gray-500 text rounded-lg focus:ring-green-500 focus:border-green-500 w-96 md:w-64 p-2.5" value={selectedNumPersonas} onChange={(e) => setSelectedNumPersonas(e.target.value)}>
 							<option value="">Seleccione</option>
 							{Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
 								<option key={num} value={num}>
@@ -99,7 +99,7 @@ function ReservationForm() {
 							<button
 								type="button"
 								onClick={handleContinue}
-								className={`mt-2 py-3 rounded text-center transition font-medium ${!date || !selectedTime || !selectedNumPersonas
+								className={`mt-3 py-3 rounded text-center transition font-medium ${!date || !selectedTime || !selectedNumPersonas
 									? "bg-gray-500 text-white cursor-not-allowed"
 									: "bg-green-500 text-white"
 									}`}
