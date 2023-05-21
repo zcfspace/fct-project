@@ -4,7 +4,17 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast } from 'sonner'
 
-export default function CreateCategory() {
+interface Category {
+	id: string;
+	name: string;
+	slug: string;
+}
+
+interface CreateCategoryProps {
+	onAddCategory: (newCategory: Category) => void;
+}
+
+export default function CreateCategory({ onAddCategory }: CreateCategoryProps) {
 
 	let [isOpen, setIsOpen] = useState(false)
 
@@ -20,11 +30,15 @@ export default function CreateCategory() {
 
 	const onSubmit = async (data: any) => {
 		try {
-			await axios.post('/api/category/post', data);
+			const response = await axios.post('/api/category/post', data);
+
+			onAddCategory(response.data);
+
+			toast.success(`Categoría ${data.name} creada correctamente`);
+
 		} catch (error) {
 			toast.error('Error al crear la categoría');
 		}
-		toast.success(`Categoría ${data.name} creada correctamente`);
 		closeModal();
 	};
 
@@ -78,10 +92,10 @@ export default function CreateCategory() {
 												Nombre
 											</label>
 											<input
-												{...register('name', { required: 'El nombre es obligatorio' })}
+												{...register('name', { required: true })}
 												type="text"
 												id="name"
-												className="p-2 mt-1 block w-full rounded-md border-gray-300 shadow focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+												className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
 											/>
 											{errors.name && <p className="text-red-500 text-xs mt-1">El nombre es obligatorio</p>}
 
@@ -89,17 +103,17 @@ export default function CreateCategory() {
 												Slug
 											</label>
 											<input
-												{...register('slug', { required: 'El slug es obligatorio' })}
+												{...register('slug', { required: true })}
 												type="text"
 												id="slug"
-												className="p-2 mt-1 block w-full rounded-md border-gray-300 shadow focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+												className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
 											/>
 											{errors.slug && <p className="text-red-500 text-xs mt-1">El slug es obligatorio</p>}
 
 											<div className="mt-4">
 												<button
 													type="submit"
-													className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+													className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
 												>
 													Crear
 												</button>

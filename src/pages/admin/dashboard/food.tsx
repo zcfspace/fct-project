@@ -4,10 +4,12 @@ import CreateFood from '@/components/Backend/createFood';
 import { Toaster, toast } from 'sonner'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import EditFood from '@/components/Backend/editFood';
 interface Food {
   id: string;
   name: string;
   price: number;
+  image: string;
   categoryId: string;
 }
 
@@ -15,19 +17,35 @@ function FoodPage() {
 
   const [foods, setFoods] = useState<Food[]>([]);
 
+  const getFoods = async () => {
+    try {
+      const response = await axios.get(`/api/food/get`);
+      const data = await response.data;
+      setFoods(data);
+    } catch (error) {
+      toast.error('Error al cargar los platos');
+    }
+  };
+
   useEffect(() => {
-    const getFoods = async () => {
-      try {
-        const response = await axios.get(`/api/food/get`);
-        const data = await response.data;
-        setFoods(data);
-      } catch (error) {
-        toast.error('Error al cargar los platos');
-      }
-    };
+
     getFoods();
   }, []);
 
+  const deleteCategory = async (id: string) => {
+    try {
+      const response = await fetch(`/api/food/delete?id=${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setFoods(foods.filter((food) => food.id !== id));
+        toast.success('Plato eliminado correctamente');
+      }
+    }
+    catch (error) {
+      toast.error(`Error al eliminar el plato`);
+    }
+  };
 
   return (
     <Layout>
@@ -51,13 +69,17 @@ function FoodPage() {
                 <td className="px-6 py-3">{food.price}</td>
                 <td className="px-6 py-3">{food.categoryId}</td>
                 <td className="px-6 py-3">
+                  <EditFood
+                    id={food.id}
+                    name={food.name}
+                    price={food.price}
+                    image= {food.image}
+                    categoryId={food.categoryId}
+                    onUpdate = {getFoods}
+                  />
+                  
                   <button
-                    // onClick={() => editFood(food.id)}
-                    className="text-green-500 mr-5">
-                    Editar
-                  </button>
-                  <button
-                    // onClick={() => deleteFood(food.id)}
+                    onClick={() => deleteCategory(food.id)}
                     className="text-red-500">
                     Eliminar
                   </button>

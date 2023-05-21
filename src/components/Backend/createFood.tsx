@@ -1,14 +1,20 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast } from 'sonner'
+interface Category {
+	id: string;
+	name: string;
+	slug: string;
+}
 
-export default function CreateFood() {
+export default function FoodCategory() {
 
 	let [isOpen, setIsOpen] = useState(false)
 
 	const { register, handleSubmit, formState: { errors }, } = useForm();
+	const [categories, setCategories] = useState<Category[]>([]);
 
 	function closeModal() {
 		setIsOpen(false)
@@ -19,14 +25,53 @@ export default function CreateFood() {
 	}
 
 	const onSubmit = async (data: any) => {
-		try {
-			await axios.post('/api/food/post', data);
-		} catch (error) {
-			toast.error('Error al crear el plato');
+		const { name, price, image, categoryId } = data;
+
+		if (!image[0].type.startsWith("image/")) {
+			toast.error('El archivo seleccionado no es una imagen');
+			return;
 		}
-		toast.success(`Plato ${data.name} creada correctamente`);
+
+		const reader = new FileReader();
+		reader.readAsDataURL(image[0]);
+		reader.onload = async () => {
+			const base64Image = reader.result;
+
+			const response = await fetch('/api/food/post', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name,
+					price,
+					image: base64Image,
+					categoryId,
+				}),
+			});
+
+			if (response.ok) {
+				toast.success(`Plato ${name} añadido correctamente`);
+			} else {
+				toast.error('Error al añadir el plato');
+			}
+		};
 		closeModal();
 	};
+
+	useEffect(() => {
+		const getCategories = async () => {
+			try {
+				const response = await axios.get(`/api/category/get`);
+				const data = await response.data;
+				setCategories(data);
+			} catch (error) {
+				toast.error('Error al cargar las categorias');
+			}
+		};
+		getCategories();
+	}, [])
+
 
 	return (
 		<>
@@ -74,37 +119,83 @@ export default function CreateFood() {
 									</Dialog.Title>
 									<div className="mt-4">
 										<form onSubmit={handleSubmit(onSubmit)}>
-											<label htmlFor="name" className="block text-sm font-medium text-gray-700">
-												Nombre
-											</label>
-											<input
-												{...register('name', { required: 'El nombre es obligatorio' })}
-												type="text"
-												id="name"
-												className="p-2 mt-1 block w-full rounded-md border-gray-300 shadow focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
-											/>
-											{errors.name && <p className="text-red-500 text-xs mt-1">El nombre es obligatorio</p>}
+											<div className="mb-4">
+												<label htmlFor="name" className="block text-sm font-medium text-gray-700">
+													Nombre
+												</label>
+												<input
+													{...register("name", { required: true })}
+													type="text"
+													id="name"
+													className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
+												/>
+												{errors.name && (
+													<span className="text-red-500 text-xs">Este campo es obligatorio</span>
+												)}
+											</div>
 
-											<label htmlFor="slug" className="block mt-4 text-sm font-medium text-gray-700">
-												Slug
-											</label>
-											<input
-												{...register('slug', { required: 'El slug es obligatorio' })}
-												type="text"
-												id="slug"
-												className="p-2 mt-1 block w-full rounded-md border-gray-300 shadow focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
-											/>
-											{errors.slug && <p className="text-red-500 text-xs mt-1">El slug es obligatorio</p>}
+											<div className="mb-4">
+												<label htmlFor="price" className="block text-sm font-medium text-gray-700">
+													Precio
+												</label>
+												<input
+													{...register("price", { required: true })}
+													type="number"
+													id="price"
+													className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
+												/>
+												{errors.price && (
+													<span className="text-red-500 text-xs">Este campo es obligatorio</span>
+												)}
+											</div>
+
+											<div className="mb-4">
+												<label htmlFor="image" className="block text-sm font-medium text-gray-700">
+													Imagen
+												</label>
+												<input
+													{...register("image", { required: true })}
+													type="file"
+													id="image"
+													accept="image/*"
+													className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
+												/>
+
+												{errors.image && (
+													<span className="text-red-500 text-xs">Este campo es obligatorio</span>
+												)}
+											</div>
+
+											<div className="mb-4">
+												<label htmlFor="categoryId" className="block text-sm font-medium text-gray-700">
+													Categoría
+												</label>
+												<select
+													{...register("categoryId", { required: true })}
+
+													id="categoryId"
+													className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
+												>
+													<option value="">Selecciona una categoría</option>
+													{categories.map((category) => (
+														<option key={category.id} value={category.id}>{category.name}</option>
+													))}
+												</select>
+												{errors.categoryId && (
+													<span className="text-red-500 text-xs">Este campo es obligatorio</span>
+												)}
+											</div>
 
 											<div className="mt-4">
 												<button
 													type="submit"
-													className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+													className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
 												>
-													Crear
+													Añadir plato
 												</button>
 											</div>
 										</form>
+
 									</div>
 								</Dialog.Panel>
 							</Transition.Child>

@@ -20,9 +20,9 @@ export default async function handler(
         },
       });
 
-      res.status(200).json({ message: "Reserva eliminada correctamente" });
+      res.status(200).json({ message: "Reserva eliminada categoría" });
     } catch (error) {
-      res.status(500).json({ error: "Error al eliminar la reserva" });
+      res.status(500).json({ error: "Error al eliminar la categoría" });
     }
   } else {
     res.status(405).json({ error: "Método no permitido" });

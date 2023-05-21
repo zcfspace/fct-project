@@ -1,18 +1,32 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/libs/prisma";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") {
-    try {
-      const foods = await prisma.food.findMany();
-      res.status(200).json(foods);
-    } catch (error) {
-      res.status(500).json({ error: "Error al obtener las categorias" });
+  const { categoryId } = req.query;
+
+  try {
+    let foods;
+
+    if (categoryId) {
+      foods = await prisma.food.findMany({
+        where: {
+          categoryId: categoryId as string,
+        },
+      });
+    } else {
+      foods = await prisma.food.findMany();
     }
-  } else {
-    res.status(405).json({ error: "Método no permitido" });
+
+    res.status(200).json(foods);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener las comidas" });
+  } finally {
+    await prisma.$disconnect();
   }
 }

@@ -5,7 +5,7 @@ const Contacto: React.FC = () => {
   return (
     <Layout>
       <div className="mx-auto max-w-screen-xl">
-        <ContactForm />
+        <ContactForm /> 
       </div>
     </Layout>
   )

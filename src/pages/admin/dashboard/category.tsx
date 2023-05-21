@@ -4,6 +4,7 @@ import CreateCategory from '@/components/Backend/createCategory';
 import { Toaster, toast } from 'sonner'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import EditCategory from '@/components/Backend/editCategory';
 interface Category {
   id: string;
   name: string;
@@ -13,16 +14,17 @@ interface Category {
 function CategoryPage() {
   const [categories, setCategories] = useState<Category[]>([]);
 
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(`/api/category/get`);
+      const data = await response.data;
+      setCategories(data);
+    } catch (error) {
+      toast.error('Error al cargar las categorias');
+    }
+  };
+
   useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const response = await axios.get(`/api/category/get`);
-        const data = await response.data;
-        setCategories(data);
-      } catch (error) {
-        toast.error('Error al cargar las categorias');
-      }
-    };
     getCategories();
   }, []);
 
@@ -31,7 +33,6 @@ function CategoryPage() {
       const response = await fetch(`/api/category/delete?id=${id}`, {
         method: 'DELETE',
       });
-
       if (response.ok) {
         setCategories(categories.filter((category) => category.id !== id));
         toast.success('Categoría eliminada correctamente');
@@ -42,15 +43,15 @@ function CategoryPage() {
     }
   };
 
-  const editCategory = (id: string) => {
-    console.log(`Editar categoría con ID: ${id}`);
+  const addCategory = (newCategory: Category) => {
+    setCategories((prevCategories) => [...prevCategories, newCategory]);
   };
 
   return (
     <Layout>
       <Toaster richColors closeButton position="top-right" />
-      <CreateCategory />
-
+      <CreateCategory onAddCategory={addCategory} />
+      
       <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
         <table className="w-full text-sm text-left text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-green-100">
@@ -66,18 +67,17 @@ function CategoryPage() {
                 <td className="px-6 py-3">{category.name}</td>
                 <td className="px-6 py-3">{category.slug}</td>
                 <td className="px-6 py-3">
-                  <button
-                    className="text-green-500 mr-5"
-                    onClick={() => editCategory(category.id)}>
-                    Editar
-                  </button>
-
+                  <EditCategory
+                    id={category.id}
+                    name={category.name}
+                    slug={category.slug}
+                    onUpdate={getCategories}
+                  />
                   <button
                     className="text-red-500"
                     onClick={() => deleteCategory(category.id)}>
                     Eliminar
                   </button>
-
                 </td>
               </tr>
             ))}
