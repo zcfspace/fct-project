@@ -19,7 +19,7 @@ export default async function handler(
       res.status(200).json(orders);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Error al obtener las ordenes" });
+      res.status(500).json({ message: "Error al obtener las comandas" });
     }
   } else {
     res.status(405).json({ message: "Método no permitido" });
