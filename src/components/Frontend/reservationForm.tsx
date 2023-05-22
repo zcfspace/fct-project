@@ -142,7 +142,7 @@ function ReservationForm() {
 
 					<button type="submit" className='rounded-lg bg-green-500 transition hover:bg-green-600 px-5 p-2.5 text font-medium text-white mr-2'>Reservar</button>
 
-					<button type="button" className='rounded-lg bg-blue-500 transition hover:bg-blue-600 px-5 p-2.5 text font-medium text-white' onClick={handleBack}>Volver</button>
+					<button type="button" className='rounded-lg bg-red-500 transition hover:bg-red-600 px-5 p-2.5 text font-medium text-white' onClick={handleBack}>Volver</button>
 				</form>
 			)}
 		</div>

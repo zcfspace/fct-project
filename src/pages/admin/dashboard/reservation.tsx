@@ -56,7 +56,6 @@ function ReservationPage() {
   return (
     <Layout>
       <div className='p-4'>
-
         <Toaster richColors closeButton position="top-right" />
         <div className='flex'>
           <div className='mr-3'>
@@ -73,7 +72,7 @@ function ReservationPage() {
               dateFormat="yyyy-MM-dd"
               isClearable
               placeholderText="Selecciona una fecha"
-              className='w-full text-gray-500 shadow-md sm:rounded-lg px-6 py-2 mb-4 bg-gray-50'
+              className='w-full text-gray-500 shadow-md sm:rounded-lg px-6 py-2 mb-4 bg-gray-50 outline-none transition-all placeholder:text-gray-500 focus:border-green-300 focus:ring-1 focus:ring-green-300'
             />
           </div>
         </div>

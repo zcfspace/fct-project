@@ -1,4 +1,4 @@
-import Layout from "../components/Frontend/layout";
+import Layout from "@/components/Frontend/layout";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -62,29 +62,15 @@ function Carta() {
               className={`py-3 rounded-lg ${category.id === categoryId
                   ? "bg-green-500 text-white"
                   : "bg-gray-100 text-gray-500 hover:text-gray-900 transition text-base"
-                }`}
-            >
+                }`}>
               {category.name}
             </button>
           ))}
         </div>
-
         <div className="m-10 sm:m-12 md:m-16 md:my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {foods.map((food: Food) => (
             <div key={food.id}>
-              <div
-                className="
-              flex
-              flex-col
-              justify-center
-              items-center
-              bg-white
-              p-2
-              shadow
-              rounded-lg
-              m-4
-            "
-              >
+              <div className="flex flex-col justify-center items-center bg-white p-2 shadow rounded-lg m-4">
                 <Image
                   className="rounded-full"
                   src={food.image}

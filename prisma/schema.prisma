@@ -8,44 +8,36 @@ generator client {
 }
 
 model category {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  slug  String
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  slug String
 }
 
 model food {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   name       String
-  price      Int
+  price      Float
   image      String
-  categoryId String   @db.ObjectId
-  orderId    String?  @db.ObjectId
-  order      order?   @relation(fields: [orderId], references: [id])
-}
-
-model customer {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String
-  address  String?
-  phone    String
-  bookings booking[]
-}
-
-model booking {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  date       DateTime
-  hour       Int
-  num_person Int
-  status     String   @default("pending")
-  customerId String   @db.ObjectId
-  customer   customer @relation(fields: [customerId], references: [id])
+  categoryId String      @db.ObjectId
+  orderItems orderItem[]
 }
 
 model order {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  bookingId String @db.ObjectId
-  foods     food[]
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  table      Int?
+  status     String      @default("pediente") // pediente, completado, cancelado
+  orderItems orderItem[]
+}
+
+model orderItem {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId  String @db.ObjectId
+  foodId   String @db.ObjectId
+  quantity Int
+  food     food   @relation(fields: [foodId], references: [id])
+  order    order  @relation(fields: [orderId], references: [id])
 }
 
 model admin {
@@ -63,6 +55,6 @@ model reservation {
   lastName   String
   email      String
   phone      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
