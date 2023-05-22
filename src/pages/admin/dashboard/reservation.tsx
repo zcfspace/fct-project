@@ -107,6 +107,20 @@ function ReservationPage() {
                   </td>
                 </tr>
               ))}
+              {/* {reservations.slice(0, 9).map((reservation) => (
+                <tr key={reservation.id} className='hover:bg-gray-50 hover:shadow-md  even:bg-green-100 odd:bg-white'>
+                  <td className="px-6 py-4">{new Date(reservation.date).toLocaleDateString()}</td>
+                  <td className="px-6 py-4">{reservation.time}</td>
+                  <td className="px-6 py-4">{reservation.numPersons}</td>
+                  <td className="px-6 py-4">{reservation.name}</td>
+                  <td className="px-6 py-4">{reservation.lastName}</td>
+                  <td className="px-6 py-4">{reservation.email}</td>
+                  <td className="px-6 py-4">{reservation.phone}</td>
+                  <td className="px-6 py-4 text-red-500">
+                    <button onClick={() => deleteReservation(reservation.id)}>Eliminar</button>
+                  </td>
+                </tr>
+              ))} */}
             </tbody>
           </table>
         </div>

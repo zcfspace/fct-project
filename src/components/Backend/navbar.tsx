@@ -23,9 +23,9 @@ export default function Navbar() {
 				</button>
 
 				{menuOpen && (
-					<div className="fixed inset-x-2 top-[3.5rem] bottom-[3.5rem] bg-white shadow-md p-4 overflow-y-auto z-[1000]">
+					<div className="fixed inset-x-0 top-[4rem] bg-white shadow-md p-4 overflow-y-auto z-[1000]">
 						<nav aria-label="Mobile Site Nav">
-							<ul className="space-y-2 tracking-wide mt-8">
+							<ul className="space-y-2 tracking-wide mt-8 mb-4">
 								<li>
 									<Link href="/admin/dashboard" aria-label="dashboard" className={
 										router && router.pathname === "/admin/dashboard"
@@ -98,6 +98,7 @@ export default function Navbar() {
 								</li>
 							</ul>
 						</nav>
+						
 						<div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
 							<button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group" onClick={cerrarSesion}>
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 group-hover:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

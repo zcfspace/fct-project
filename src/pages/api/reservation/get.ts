@@ -18,7 +18,7 @@ export default async function handler(
         orderBy: {
           createdAt: "desc",
         },
-        take: dateFilter ? undefined : 10,
+        take: dateFilter ? undefined : 9,
       });
 
       res.status(200).json(reservations);

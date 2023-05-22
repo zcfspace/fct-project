@@ -96,9 +96,9 @@ export default function Navbar() {
             </button>
 
             {menuOpen && (
-              <div className="fixed inset-x-0 top-[3.5rem] bottom-[3.5rem] bg-white shadow-md p-4 overflow-y-auto z-[1000]">
+              <div className="fixed inset-x-4 top-[3.5rem] bg-white shadow-md p-4 overflow-y-auto z-[1000]">
                 <nav aria-label="Mobile Site Nav">
-                  <ul className="space-y-4">
+                  <ul className="space-y-4 text-center mx-6 ">
                     <li>
                       <Link href="/carta" passHref>
                         <span

@@ -49,20 +49,24 @@ export default function LoginForm() {
         <div className="flex justify-center mt-20 mx-auto max-w-screen-xl">
             <form className="p-16 rounded shadow-md w-3/4 sm:w-3/6 md:w-3/6 lg:w-5/12 xl:w-2/6" onSubmit={handleSubmit(onSubmit)}>
                 <Toaster richColors position="bottom-center" />
-                <div>
+                <div className="mb-4">
                     <label htmlFor="username" className="block text-gray-700 font-semibold ">Usuario</label>
-                    <input id="username" {...register('username')} className="border p-2 w-full rounded" />
+                    <input id="username" {...register('username')}
+                        className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300" />
                     {errors.username && <p className="text-red-500">Debes introducir un usuario</p>}
                 </div>
 
-                <div className="mt-4">
+                <div className="mb-4">
                     <label htmlFor="password" className="block text-gray-700 font-semibold">Contraseña</label>
-                    <input id="password" type="password" {...register('password')} className="border p-2 w-full rounded" />
+                    <input id="password" type="password" {...register('password')}
+                        className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300" />
                     {errors.password && <p className="text-red-500">La contraseña debe tener al menos 4 caracteres</p>}
                 </div>
 
-                <div className="flex justify-start">
-                    <button type="submit" className="bg-green-500 text-white rounded transition hover:bg-green-600 p-2 mt-6">Iniciar sesión</button>
+                <div>
+                    <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2">
+                        Iniciar sesión
+                    </button>
                 </div>
             </form>
         </div>
