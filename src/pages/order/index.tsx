@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from 'react';
 import { Toaster, toast } from 'sonner'
 import Image from "next/image";
+import { Dialog, Transition } from '@headlessui/react';
+
 interface Food {
   id: string;
   name: string;
@@ -18,7 +20,24 @@ function Order() {
   const [foods, setFoods] = useState<Food[]>([]);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [table, setTable] = useState("");
-  const [showCart, setShowCart] = useState(false);
+  let [isOpenCart, setIsOpenCart] = useState(false)
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function closeCart() {
+    setIsOpenCart(false)
+  }
+
+  function openCart() {
+    setIsOpenCart(true)
+  }
 
   const addToCart = (food: Food) => {
     const existingItem = cartItems.find(item => item.food.id === food.id);
@@ -49,11 +68,13 @@ function Order() {
       });
       const data = await response.json();
       if (data.success) {
+        closeModal();
         setCartItems([]);
         setTable("");
         toast.success('Pedido finalizado', {
           duration: Infinity,
         });
+
       } else {
         toast.error('Error al finalizar el pedido');
       }
@@ -81,7 +102,7 @@ function Order() {
       <div className="flex flex-wrap m-10">
         {foods.map((food: Food) => (
           <div key={food.id} className="lg:w-1/4 md:w-1/2 p-4">
-            <div className="block relative h-36 shadow-xl">
+            <div className="block relative h-40 shadow-xl">
               <Image
                 alt="food"
                 width={300}
@@ -91,50 +112,221 @@ function Order() {
               />
             </div>
             <div className="mt-4 gap-2 flex justify-between">
-              <div>
-                <h2 className="text-gray-900 title-font text-lg font-medium">{food.name}</h2>
-                <button onClick={() => addToCart(food)}>Añadir al carrito</button>
-              </div>
-
-              <div>
-                <p className="mt-1">{food.price} €</p>
-                <span>{cartItems.find(item => item.food.id === food.id)?.quantity || 0}</span>
-              </div>
+              <h2 className="text-gray-900 title-font text-lg font-medium">{food.name}</h2>
+              <p className="mt-1">{food.price} €</p>
+            </div>
+            <div className='flex items-center mt-2'>
+              <button className="text-red-500 mr-1" onClick={() => setCartItems(cartItems.map((cartItem) => {
+                if (cartItem.food.id === food.id) {
+                  return { ...cartItem, quantity: cartItem.quantity - 1 };
+                } else {
+                  return cartItem;
+                }
+              }))}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
+                </svg>
+              </button>
+              <span className='text-gray-900 font-bold'>
+                {cartItems.find(item => item.food.id === food.id)?.quantity || 0}
+              </span>
+              <button className="text-green-500 ml-1" onClick={() => addToCart(food)}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
+                </svg>
+              </button>
             </div>
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 z-50 w-full h-24 bg-white border-t border-gray-200 dark:bg-gray-100">
-        <div className="mx-10 flex justify-between items-center h-full">
+      <div className="fixed bottom-0 left-0 z-50 flex justify-center items-center w-full h-16 border-gray-200 bg-gray-100 rounded-full shadow-lg">
+        <div className="flex justify-between items-center h-full">
           <div>
-            <select id="table"
-              className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
-              value={table} onChange={(e) => setTable(e.target.value)}>
-              <option value="">Seleccionar la mesa:</option>
-              <option value="1">Mesa 1</option>
-              <option value="2">Mesa 2</option>
-              <option value="3">Mesa 3</option>
-            </select>
-          </div>
-          <div>
-            <button
-              className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-              onClick={() => setShowCart(!showCart)}>Mostrar carrito</button>
-            {showCart && (
-              <div>
-                <h2>Carrito</h2>
-                {cartItems.map((item: CartItem) => (
-                  <div key={item.food.id}>
-                    <p>{item.food.name} - {item.quantity}</p>
+            <button className="text-green-500 mr-3" onClick={openCart}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+            </button>
+            <Transition appear show={isOpenCart} as={Fragment}>
+              <Dialog as="div" className="relative z-10" onClose={closeCart}>
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="fixed inset-0 bg-black bg-opacity-25" />
+                </Transition.Child>
+
+                <div className="fixed inset-0 overflow-y-auto">
+                  <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0 scale-95"
+                      enterTo="opacity-100 scale-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100 scale-100"
+                      leaveTo="opacity-0 scale-95"
+                    >
+
+                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                        <Dialog.Title
+                          as="h3"
+                          className="text-lg font-medium leading-6 text-gray-900"
+                        >
+                          Carrito
+                        </Dialog.Title>
+                        <table className="w-full text-sm text-left text-gray-500 my-3 ">
+                          <thead className="text-xs text-gray-700 uppercase bg-green-100">
+                            <tr>
+                              <th className="px-6 py-3">Nombre</th>
+                              <th className="px-6 py-3">Cantidad</th>
+                              <th className="px-6 py-3"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {cartItems.map((item: CartItem) => (
+                              <tr key={item.food.id} className='hover:bg-gray-50 hover:shadow-md even:bg-green-100 odd:bg-white'>
+                                <td className="px-6 py-3">{item.food.name}</td>
+                                <td className="px-6 py-3">{item.quantity}</td>
+                                <td className="px-6 py-3 text-right">
+                                  <button
+                                    className="text-red-500"
+                                    onClick={() => setCartItems(cartItems.map((cartItem) => {
+                                      if (cartItem.food.id === item.food.id) {
+                                        return { ...cartItem, quantity: cartItem.quantity - 1 };
+                                      } else {
+                                        return cartItem;
+                                      }
+                                    }))}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+                                    </svg>
+                                  </button>
+                                  <button
+                                    className="text-green-500"
+                                    onClick={() => setCartItems(cartItems.map((cartItem) => {
+                                      if (cartItem.food.id === item.food.id) {
+                                        return { ...cartItem, quantity: cartItem.quantity + 1 };
+                                      } else {
+                                        return cartItem;
+                                      }
+                                    }))}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                  </button>
+                                  {/* <button
+                                    className="text-red-500"
+                                    onClick={() => setCartItems(cartItems.filter((cartItem) => cartItem.food.id !== item.food.id))}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                  </button> */}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                        <div className='mt-6 text-right'>
+                          <p className='text-red-500'>
+                            {cartItems.length === 0 && 'No hay platos en el carrito'}
+                          </p>
+
+                          <p className='font-semibold text-green-500'>
+                            {cartItems.length > 0 && 'Total: ' + cartItems.reduce((acc, item) => acc + item.food.price * item.quantity, 0) + ' €'}
+                          </p>
+                        </div>
+                      </Dialog.Panel>
+                    </Transition.Child>
                   </div>
-                ))}
-              </div>
-            )}
+                </div>
+              </Dialog>
+            </Transition>
           </div>
+
           <div>
-            <button
-              className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-              onClick={finalizeOrder} disabled={!table}>Finalizar pedido</button>
+            <button className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+              onClick={openModal}>
+              Finalizar pedido
+            </button>
+            <Transition appear show={isOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="fixed inset-0 bg-black bg-opacity-25" />
+                </Transition.Child>
+
+                <div className="fixed inset-0 overflow-y-auto">
+                  <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0 scale-95"
+                      enterTo="opacity-100 scale-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100 scale-100"
+                      leaveTo="opacity-0 scale-95"
+                    >
+
+                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                        <Dialog.Title
+                          as="h3"
+                          className="text-lg font-medium leading-6 text-gray-900"
+                        >
+                          Finalizar pedido
+                        </Dialog.Title>
+
+                        <div className='my-3'>
+                          <select id="table"
+                            className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
+                            value={table} onChange={(e) => setTable(e.target.value)}>
+                            <option value="">Seleccionar la mesa:</option>
+                            <option value="1">Mesa 1</option>
+                            <option value="2">Mesa 2</option>
+                            <option value="3">Mesa 3</option>
+                          </select>
+                        </div>
+
+                        <div className='my-3'>
+                          <p className='text-red-500'>
+                            {cartItems.length === 0 && 'No hay platos en el carrito'}
+                          </p>
+                          <p className='text-red-500'>
+                            {!table && 'Por favor, selecciona una mesa para finalizar el pedido'}
+                          </p>
+                        </div>
+
+                        <div className='flex justify-between items-center mt-6'>
+                          <div>
+                            <p className='font-semibold text-green-500'>
+                              {cartItems.length > 0 && 'Total: ' + cartItems.reduce((acc, item) => acc + item.food.price * item.quantity, 0) + ' €'}
+                            </p>
+                          </div>
+                          <div>
+                            <button
+                              className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                              onClick={finalizeOrder} disabled={!table}>Finalizar pedido
+                            </button>
+                          </div>
+                        </div>
+                      </Dialog.Panel>
+                    </Transition.Child>
+                  </div>
+                </div>
+              </Dialog>
+            </Transition>
           </div>
         </div>
       </div>
@@ -143,3 +335,4 @@ function Order() {
 }
 
 export default Order;
+

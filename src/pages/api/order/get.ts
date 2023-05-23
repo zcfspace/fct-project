@@ -7,7 +7,10 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
+      const status = req.query.status as string | undefined;
+
       const orders = await prisma.order.findMany({
+        where: status ? { status } : {},
         include: {
           orderItems: {
             include: {
@@ -16,6 +19,7 @@ export default async function handler(
           },
         },
       });
+
       res.status(200).json(orders);
     } catch (error) {
       console.log(error);
