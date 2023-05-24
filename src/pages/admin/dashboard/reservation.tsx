@@ -81,14 +81,14 @@ function ReservationPage() {
           <table className="w-full text-sm text-left text-gray-500 ">
             <thead className='text-xs text-gray-700 uppercase bg-green-100'>
               <tr>
-                <th scope="col" className="px-6 py-3">Fecha</th>
-                <th scope="col" className="px-6 py-3">Hora</th>
-                <th scope="col" className="px-6 py-3">Personas</th>
-                <th scope="col" className="px-6 py-3">Nombre</th>
-                <th scope="col" className="px-6 py-3">Apellido</th>
-                <th scope="col" className="px-6 py-3">Email</th>
-                <th scope="col" className="px-6 py-3">Teléfono</th>
-                <th scope="col" className="px-6 py-3"></th>
+                <th className="px-6 py-3">Fecha</th>
+                <th className="px-6 py-3">Hora</th>
+                <th className="px-6 py-3">Personas</th>
+                <th className="px-6 py-3">Nombre</th>
+                <th className="px-6 py-3">Apellido</th>
+                <th className="px-6 py-3">Email</th>
+                <th className="px-6 py-3">Teléfono</th>
+                <th className="px-6 py-3"></th>
               </tr>
             </thead>
             <tbody>

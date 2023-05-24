@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   if (req.method === "PUT") {
     try {
-      const { id, status } = req.query;
+      const { id, status } = req.body;
       const updatedOrder = await prisma.order.update({
         where: { id: id as string },
         data: { status: status as string },

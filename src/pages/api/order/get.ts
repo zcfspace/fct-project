@@ -7,10 +7,20 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const status = req.query.status as string | undefined;
+      const status = req.query.status as string;
 
       const orders = await prisma.order.findMany({
-        where: status ? { status } : {},
+        //Si no hay estado, se mostrarán las comandas de estado pendiente o procesando
+        where: status
+          ? { status: status }
+          : {
+              status: {
+                in: ["pendiente", "procesando"],
+              },
+            },
+        orderBy: {
+          createdAt: "desc",
+        },
         include: {
           orderItems: {
             include: {

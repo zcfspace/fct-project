@@ -293,9 +293,11 @@ function Order() {
                             className="mt-1 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300"
                             value={table} onChange={(e) => setTable(e.target.value)}>
                             <option value="">Seleccionar la mesa:</option>
-                            <option value="1">Mesa 1</option>
-                            <option value="2">Mesa 2</option>
-                            <option value="3">Mesa 3</option>
+                            {
+                              Array.from({ length: 20 }, (_, i) => (
+                                <option key={i + 1} value={i + 1}>Mesa {i + 1}</option>
+                              ))
+                            }
                           </select>
                         </div>
 
