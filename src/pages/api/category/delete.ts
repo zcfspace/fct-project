@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/libs/prisma";
-import authMiddleware from "@/libs/authMiddleware";
+// import authMiddleware from "@/libs/authMiddleware";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  await authMiddleware(req, res);
-  
+  // await authMiddleware(req, res);
+
   if (req.method === "DELETE") {
     const { id } = req.query;
 
@@ -15,7 +15,7 @@ export default async function handler(
       res.status(400).json({ error: "Se requiere el ID de la categoría" });
       return;
     }
-    
+
     try {
       await prisma.category.delete({
         where: {
