@@ -24,8 +24,8 @@ export default function Navbar() {
             <Link href="/" passHref>
               <span
                 className={`${router.pathname === "/"
-                    ? "text-green-500"
-                    : "text-gray-500 hover:text-gray-900 transition"
+                  ? "text-green-500"
+                  : "text-gray-500 hover:text-gray-900 transition"
                   }  text-base`}
               >
                 Inicio
@@ -34,8 +34,8 @@ export default function Navbar() {
             <Link href="/carta" passHref>
               <span
                 className={`${router.pathname === "/carta"
-                    ? "text-green-500"
-                    : "text-gray-500 hover:text-gray-900 transition "
+                  ? "text-green-500"
+                  : "text-gray-500 hover:text-gray-900 transition "
                   } text-base`}
               >
                 Carta
@@ -44,8 +44,8 @@ export default function Navbar() {
             <Link href="/reserva" passHref>
               <span
                 className={`${router.pathname === "/reserva"
-                    ? "text-green-500"
-                    : "text-gray-500 hover:text-gray-900 transition"
+                  ? "text-green-500"
+                  : "text-gray-500 hover:text-gray-900 transition"
                   }  text-base`}
               >
                 Reserva
@@ -54,8 +54,8 @@ export default function Navbar() {
             <Link href="/contacto" passHref>
               <span
                 className={`${router.pathname === "/contacto"
-                    ? "text-green-500"
-                    : "text-gray-500 hover:text-gray-900 transition"
+                  ? "text-green-500"
+                  : "text-gray-500 hover:text-gray-900 transition"
                   }  text-base`}
               >
                 Contacto
@@ -100,12 +100,25 @@ export default function Navbar() {
                 <nav aria-label="Mobile Site Nav">
                   <ul className="space-y-4 text-center mx-6 ">
                     <li>
+                      <Link href="/" passHref>
+                        <span
+                          onClick={() => setMenuOpen(false)}
+                          className={`${router.pathname === "/blog"
+                            ? "text-green-500"
+                            : "text-gray-500 hover:text-gray-900 transition "
+                            } text-base`}
+                        >
+                          Inicio
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
                       <Link href="/carta" passHref>
                         <span
                           onClick={() => setMenuOpen(false)}
                           className={`${router.pathname === "/carta"
-                              ? "text-green-500"
-                              : "text-gray-500 hover:text-gray-900 transition"
+                            ? "text-green-500"
+                            : "text-gray-500 hover:text-gray-900 transition"
                             }  text-base`}
                         >
                           Carta
@@ -117,24 +130,11 @@ export default function Navbar() {
                         <span
                           onClick={() => setMenuOpen(false)}
                           className={`${router.pathname === "/reserva"
-                              ? "text-green-500"
-                              : "text-gray-500 hover:text-gray-900 transition"
+                            ? "text-green-500"
+                            : "text-gray-500 hover:text-gray-900 transition"
                             }  text-base`}
                         >
                           Reserva
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/blog" passHref>
-                        <span
-                          onClick={() => setMenuOpen(false)}
-                          className={`${router.pathname === "/blog"
-                              ? "text-green-500"
-                              : "text-gray-500 hover:text-gray-900 transition "
-                            } text-base`}
-                        >
-                          Blog
                         </span>
                       </Link>
                     </li>
@@ -143,8 +143,8 @@ export default function Navbar() {
                         <span
                           onClick={() => setMenuOpen(false)}
                           className={`${router.pathname === "/contacto"
-                              ? "text-green-500"
-                              : "text-gray-500 hover:text-gray-900 transition "
+                            ? "text-green-500"
+                            : "text-gray-500 hover:text-gray-900 transition "
                             } text-base`}
                         >
                           Contacto

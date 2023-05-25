@@ -1,9 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
+import authMiddleware from "@/libs/authMiddleware";
+
 
 const prisma = new PrismaClient();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await authMiddleware(req, res);
+  
   if (req.method === "PUT") {
     const { id } = req.query;
     const { name, image, price, categoryId } = req.body;

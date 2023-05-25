@@ -33,14 +33,16 @@ function BarChart() {
     if (ordersByDate.length > 0) {
       if (chartInstance) chartInstance.destroy();
 
-      const groupedOrders = ordersByDate.reduce<Record<string, number>>((acc, order) => {
-        const date = new Date(order.createdAt).toLocaleDateString();
-        if (!acc[date]) {
-          acc[date] = 0;
+      const groupedOrders = ordersByDate.reduce((acc, order) => {
+        const date = format(new Date(order.createdAt), "dd/MM/yyyy");
+        if (acc[date]) {
+          acc[date] += order._count.createdAt;
+        } else {
+          acc[date] = order._count.createdAt;
         }
-        acc[date]++;
         return acc;
-      }, {});
+      }, {} as any);
+
 
       const labels = Object.keys(groupedOrders);
       const data = Object.values(groupedOrders);
@@ -57,9 +59,19 @@ function BarChart() {
             },
           ],
         },
-        options: {},
+        options: {
+          plugins: {
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function (context) {
+                  return `Cantidad de pedido: ${context.parsed.y}`;
+                },
+              },
+            },
+          },
+        },
       });
-
       setChartInstance(newChartInstance as Chart);
     }
   }, [ordersByDate]);
@@ -67,6 +79,7 @@ function BarChart() {
   return (
     <>
       <div className="w-full md:col-span-2 relative lg:h-[70vh] h-[50vh] m-auto p-4 border rounded-lg bg-white">
+        <h1 className="text-center text-2xl font-bold text-green-500 mt-4 mb-6">Resumen de comandas</h1>
         <canvas id="myChart"></canvas>
       </div>
     </>
