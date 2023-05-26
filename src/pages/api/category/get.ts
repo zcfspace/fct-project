@@ -1,18 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/libs/prisma";
-import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req });
-
+  const { data: session } = useSession();
   if (!session) {
-    res.status(401).json({ error: "No autorizado" });
+    res.status(401).json({ error: "No autenticado" });
     return;
   }
-  
+
   if (req.method === "GET") {
     try {
       const categories = await prisma.category.findMany();
