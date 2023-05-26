@@ -1,12 +1,13 @@
-import { getSession } from "next-auth/react";
 import { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function authMiddleware(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req });
-  //Si no hay una sesión, devolvemos un error 401
+  const session = await getServerSession(req, res, authOptions);
+
   if (!session) {
     res.status(401).json({ error: "No autorizado" });
     return;

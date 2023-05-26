@@ -1,10 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/libs/prisma";
+import authMiddleware from "@/libs/authMiddleware";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await authMiddleware(req, res);
+  
   if (req.method === "POST") {
     const { name, slug } = req.body;
 

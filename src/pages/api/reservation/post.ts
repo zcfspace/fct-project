@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { format } from "date-fns";
-import prisma from "@/libs/prisma"
+import prisma from "@/libs/prisma";
 
 export default async function handler(
   req: NextApiRequest,
