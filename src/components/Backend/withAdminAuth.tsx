@@ -9,10 +9,9 @@ export default function withAdminAuth(PageComponent: ComponentType) {
         const router = useRouter();
 
         useEffect(() => {
-            if (!session?.user && status === 'authenticated') {
-                router.push('/');
+            if (status === "unauthenticated") {
+                router.push("/login");
             }
-
         }, [status, router]);
 
         return <PageComponent {...props} />;

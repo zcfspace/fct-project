@@ -36,8 +36,6 @@ export const authOptions: AuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Contraseña incorrecta");
         }
-        console.log(admin);
-
         return {
           id: admin.id,
           username: admin.username,
