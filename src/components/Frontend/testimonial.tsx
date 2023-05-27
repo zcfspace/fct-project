@@ -25,8 +25,7 @@ export default function Testimonial() {
             </div>
 
             <p className="line-clamp-2 sm:line-clamp-none mt-4 text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              Si buscas comida china auténtica, este es el lugar para ti. Los platos son deliciosos y el ambiente es acogedor. ¡Muy recomendable!
             </p>
           </blockquote>
 
@@ -46,8 +45,7 @@ export default function Testimonial() {
             </div>
 
             <p className="line-clamp-2 sm:line-clamp-none mt-4 text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              ¡Increíble! La comida es deliciosa y auténtica, y el servicio es excelente. Definitivamente volveré.
             </p>
           </blockquote>
 
@@ -67,8 +65,7 @@ export default function Testimonial() {
             </div>
 
             <p className="line-clamp-2 sm:line-clamp-none mt-4 text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              ¡Una experiencia gastronómica increíble! La comida es auténtica y deliciosa, y el servicio es amable y atento. ¡Volveré pronto!
             </p>
           </blockquote>
         </div>

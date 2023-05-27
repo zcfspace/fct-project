@@ -116,13 +116,17 @@ function Order() {
               <p className="mt-1">{food.price} €</p>
             </div>
             <div className='flex items-center mt-2'>
-              <button className="text-red-500 mr-1" onClick={() => setCartItems(cartItems.map((cartItem) => {
-                if (cartItem.food.id === food.id) {
-                  return { ...cartItem, quantity: cartItem.quantity - 1 };
-                } else {
-                  return cartItem;
-                }
-              }))}>
+              <button className="text-red-500 mr-1"
+                onClick={() => {
+                  const delCartItems = cartItems.map((cartItem) => {
+                    if (cartItem.food.id === food.id && cartItem.quantity > 0) {
+                      return { ...cartItem, quantity: cartItem.quantity - 1 };
+                    } else {
+                      return cartItem;
+                    }
+                  }).filter((cartItem) => cartItem.quantity > 0);
+                  setCartItems(delCartItems);
+                }}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
                 </svg>
@@ -189,7 +193,7 @@ function Order() {
                             </tr>
                           </thead>
                           <tbody>
-                            {cartItems.map((item: CartItem) => (
+                            {cartItems.filter((item) => item.quantity > 0).map((item: CartItem) => (
                               <tr key={item.food.id} className='hover:bg-gray-50 hover:shadow-md even:bg-green-100 odd:bg-white'>
                                 <td className="px-6 py-3">{item.food.name}</td>
                                 <td className="px-6 py-3">{item.quantity}</td>
@@ -220,13 +224,6 @@ function Order() {
                                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                     </svg>
                                   </button>
-                                  {/* <button
-                                    className="text-red-500"
-                                    onClick={() => setCartItems(cartItems.filter((cartItem) => cartItem.food.id !== item.food.id))}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                    </svg>
-                                  </button> */}
                                 </td>
                               </tr>
                             ))}
@@ -319,7 +316,9 @@ function Order() {
                           <div>
                             <button
                               className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-5 py-2.5 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-                              onClick={finalizeOrder} disabled={!table}>Finalizar pedido
+                              onClick={finalizeOrder}
+                              disabled={cartItems.length === 0 || !table}>
+                              Finalizar pedido
                             </button>
                           </div>
                         </div>

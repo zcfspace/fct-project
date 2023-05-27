@@ -21,7 +21,7 @@ function ReservationForm() {
 	const [showForm, setShowForm] = useState(true);
 	const [selectedTime, setSelectedTime] = useState('');
 	const [selectedNumPersonas, setSelectedNumPersonas] = useState('');
-	const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormValues>();
+	const { register, handleSubmit, reset, setValue,  formState: { errors } } = useForm<FormValues>();
 
 	const onSubmit: SubmitHandler<FormValues> = async data => {
 		try {
@@ -29,6 +29,7 @@ function ReservationForm() {
 			toast.success(`Reserva creada para el ${date?.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} a las ${selectedTime} para ${selectedNumPersonas} personas`, {
 				duration: Infinity,
 			});
+			reset();
 			setDate(null);
 			setSelectedTime('');
 			setSelectedNumPersonas('');

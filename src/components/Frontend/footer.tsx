@@ -36,8 +36,7 @@ export default function Footer() {
             </div>
 
             <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 lg:text-left">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt
-              quam nostrum commodi officia quaerat?
+              Nuestras recetas únicas y de alta calidad te transportarán a un viaje culinario por China.
             </p>
           </div>
 
@@ -45,16 +44,16 @@ export default function Footer() {
             <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12">
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-gray-700 transition hover:text-green-500"
                   href="/"
                 >
                   Inicio
                 </Link>
               </li>
-              
+
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-gray-700 transition hover:text-green-500"
                   href="/carta"
                 >
                   Carta
@@ -63,7 +62,7 @@ export default function Footer() {
 
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-gray-700 transition hover:text-green-500"
                   href="/reserva"
                 >
                   Reserva
@@ -72,7 +71,7 @@ export default function Footer() {
 
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-gray-700 transition hover:text-green-500"
                   href="/contacto"
                 >
                   Contacto

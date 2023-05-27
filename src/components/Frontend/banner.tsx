@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Banner() {
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-16">
-        <div className="max-w-xl text-center sm:text-left">
+      <div className="mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-4">
+        <div className="max-w-xl text-center sm:text-left lg:pl-12">
           <h1 className="text-3xl font-extrabold sm:text-5xl">
             Bienvenido a
             <strong className="block font-extrabold text-green-600">

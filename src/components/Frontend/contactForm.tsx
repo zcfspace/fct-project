@@ -12,26 +12,27 @@ type FormData = {
 };
 
 const ContactForm: React.FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
     const onSubmit = async (data: FormData) => {
-        // try {
-        //     const response = await axios.post('/api/sendEmail', data);
-        //     if (response.status === 200) {
-        //         toast.success('Correo enviado correctamente');
-        //     } else {
-        //         toast.error('Error al enviar el correo');
-        //     }
-        // } catch (error) {
-        //     console.error('Error al enviar el correo:', error);
-        //     toast.error('Error al enviar el correo');
-        // }
+        try {
+            const response = await axios.post('/api/sendEmail', data);
+            if (response.status === 200) {
+                toast.success('Correo enviado correctamente');
+                reset();
+            } else {
+                toast.error('Error al enviar el correo');
+            }
+        } catch (error) {
+            console.error('Error al enviar el correo:', error);
+            toast.error('Error al enviar el correo');
+        }
         console.log(data);
     };
 
     return (
         <>
-            <Toaster closeButton richColors />
+            <Toaster closeButton richColors position="top-right" />
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="grid grid-cols-2 gap-4">
