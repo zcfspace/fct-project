@@ -8,7 +8,7 @@ interface Conversation {
   content: string;
 }
 
-export default function chatBot() {
+export default function ChatBot() {
   const [value, setValue] = useState<string>("");
   const [conversation, setConversation] = useState<Conversation[]>([]);
   const [isTyping, setIsTyping] = useState<boolean>(false);
