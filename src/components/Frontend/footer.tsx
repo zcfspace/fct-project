@@ -29,9 +29,10 @@ export default function Footer() {
         <div className="lg:flex lg:items-end lg:justify-between">
           <div>
             <div className="flex justify-center text-green-600 lg:justify-start">
-              <Link href="#">
-                <span className="sr-only">Logo</span>
-                <span className="inline-block h-10 w-32 rounded-lg bg-gray-200"></span>
+              <Link href="/">
+                <strong className="block font-extrabold text-2xl text-green-500">
+                  Bamboo Express
+                </strong>
               </Link>
             </div>
 

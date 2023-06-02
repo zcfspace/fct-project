@@ -97,12 +97,12 @@ function Order() {
   }, []);
 
   return (
-    <>
+    <div className="mx-auto max-w-screen-xl">
       <Toaster richColors closeButton position="top-right" />
-      <div className="flex flex-wrap m-10">
+      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-8 p-8 pb-24">
         {foods.map((food: Food) => (
-          <div key={food.id} className="lg:w-1/4 md:w-1/2 p-4">
-            <div className="block relative h-40 shadow-xl">
+          <div key={food.id}>
+            <div className="block relative h-44 shadow-xl">
               <Image
                 alt="food"
                 width={300}
@@ -331,7 +331,7 @@ function Order() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

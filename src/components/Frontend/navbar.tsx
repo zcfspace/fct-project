@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,9 +12,17 @@ export default function Navbar() {
       <div className="mx-auto max-w-screen-xl p-4">
         <div className="flex items-center justify-between gap-4 lg:gap-10">
           <div className="flex lg:w-0 lg:flex-1">
-            <Link href="/" passHref>
-              <span className="sr-only">Logo</span>
-              <span className="inline-block h-10 w-32 rounded-lg bg-gray-200"></span>
+            <Link href="/">
+              <span className="block font-extrabold text-2xl	text-green-500">
+                Bamboo Express
+              </span>
+              {/* <Image
+                alt="logo"
+                src="/ico/ico.png"
+                width={80}
+                height={80}
+                className="absolute top-0"
+              /> */}
             </Link>
           </div>
 

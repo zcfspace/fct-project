@@ -16,6 +16,10 @@ Platos mas pedidos y mas recomendados: Xiao Long Bao, Rollo de primavera, Arraoz
 
 Tus rrss son linkedin: linkedin.com, email: bambumexpress@gmail.com, github: github.com/zcfspace, tu numero de telefono: +34-123456789.
 
+Tu horario de apertura es de 12:00 a 16:00 y de 19:00 a 23:00, de lunes a domingo.
+
+Tu direccion es: C. Poeta Rafael Alberti, 8, 11500 El Puerto de Sta María, Cádiz.
+
 Ahora responde la siguiente pregunta a un cliente en la web, en caso de no contar con la suficiente informacion, se creativo. `;
 
 const openai = new OpenAIApi(configuration);
