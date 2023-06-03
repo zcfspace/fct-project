@@ -11,7 +11,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 2. Install NPM packages
 
     ```sh
-     npm install
+    npm install
     ```
 
 3. Create a .env file with the following environment variables:
