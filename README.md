@@ -1,26 +1,42 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## 📝 Installation
 
-First, run the development server:
+1. Clone the repository
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+    ```sh
+    git clone
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install NPM packages
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+    ```sh
+     npm install
+    ```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+3. Create a .env file with the following environment variables:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    ```sh
+    GITHUB_ID=
+    GITHUB_SECRET=
+    DATABASE_URL=
+    OPENAI_API_KEY=
+    SMTP_HOST= 
+    SMTP_PORT= 
+    SMTP_USER=
+    SMTP_PASSWORD=
+    SMTP_FROM_EMAIL=
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    You need a MongoDB URI, an OpenAI API token.
+    - You can get an OpenAI API token by signing up for the [OpenAI API](https://beta.openai.com/).
+    - You can get a MongoDB URI, by signing up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
+4. Run the dev server
+
+    ```sh
+     npm run dev
+    ```
 
 ## Learn More
 
