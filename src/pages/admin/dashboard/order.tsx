@@ -1,10 +1,11 @@
 import withAdminAuth from '@/components/Backend/withAdminAuth';
 import Layout from '@/components/Backend/layout';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from 'react';
 import { Toaster, toast } from 'sonner'
 import Link from 'next/link';
 import { format } from "date-fns";
-
+import { Dialog, Transition } from '@headlessui/react'
+import Image from 'next/image'
 interface Order {
   id: string;
   table: string;
@@ -27,6 +28,15 @@ function OrderPage() {
 
   const [orders, setOrders] = useState<Order[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<string>('');
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
 
   const getOrders = async () => {
     try {
@@ -80,6 +90,10 @@ function OrderPage() {
     setSelectedStatus(event.target.value);
   };
 
+  const printQR = () => {
+    window.print();
+  };
+
   return (
     <Layout>
       <Toaster richColors closeButton position="top-right" />
@@ -92,6 +106,60 @@ function OrderPage() {
               </Link>
             </button>
           </div>
+          <div className='mr-3'>
+            <button
+              type="button"
+              onClick={openModal}
+              className='rounded-md bg-green-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+              Mostrar QR
+            </button>
+          </div>
+          <Transition appear show={isOpen} as={Fragment}>
+            <Dialog as="div" className="relative z-10" onClose={closeModal}>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div className="fixed inset-0 bg-black bg-opacity-25" />
+              </Transition.Child>
+
+              <div className="fixed inset-0 overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                      <Image
+                        src="/img/vercelqr.png"
+                        alt="imagen qr"
+                        width={600}
+                        height={600}
+                      />
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          onClick={printQR}
+                          className="mr-2 rounded-md bg-green-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                          Imprimir
+                        </button>
+                      </div>
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
           <div>
             <select
               className='block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-green-300'

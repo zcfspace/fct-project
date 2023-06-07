@@ -99,7 +99,7 @@ function Order() {
   return (
     <div className="mx-auto max-w-screen-xl">
       <Toaster richColors closeButton position="top-right" />
-      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-8 p-8 pb-24">
+      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8 p-8 pb-24">
         {foods.map((food: Food) => (
           <div key={food.id}>
             <div className="block relative h-44 shadow-xl">

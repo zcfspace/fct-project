@@ -27,7 +27,7 @@ model order {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   table      Int?
-  status     String      @default("pendiente") // pediente, completado, cancelado, procesando
+  status     String      @default("pendiente") // pediente, completado, procesando
   orderItems orderItem[]
 }
 
