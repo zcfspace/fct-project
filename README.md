@@ -38,6 +38,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
      npm run dev
     ```
 
+## Preview
+![fct-project vercel app_](https://github.com/zcfspace/fct-project/assets/102738962/4534088b-5f60-4194-aa8b-f109da9f9879)
+![fct-project vercel app_admin_dashboard](https://github.com/zcfspace/fct-project/assets/102738962/9662a892-6e13-48aa-b78d-9dc4764d1c3e)
+![fct-project vercel app_admin_dashboard (1)](https://github.com/zcfspace/fct-project/assets/102738962/18fe3a98-131e-44b0-a071-0f2d0b27c0d4)
+![fct-project vercel app_order](https://github.com/zcfspace/fct-project/assets/102738962/424c5c4c-0a1d-49e7-b40f-09379fa5b1f8)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
