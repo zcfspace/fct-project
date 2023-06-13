@@ -1,6 +1,7 @@
 import Layout from "@/components/Frontend/layout";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface Food {
   id: string;
@@ -20,6 +21,7 @@ function Carta() {
   const [foods, setFoods] = useState<Food[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryId, setCategoryId] = useState<string>("");
+  const [selectedId, setSelectedId] = useState(null)
 
   const handleCategoryClick = (id: string) => {
     setCategoryId(id);
@@ -51,25 +53,45 @@ function Carta() {
     getCategories();
   }, []);
 
+  const categoryVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const foodVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1 },
+  };
+
   return (
     <Layout>
       <div className="mx-auto max-w-screen-xl">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 m-10 sm:mx-16 md:mx-24 lg:mx-32 xl:mx-64">
-          {categories.map((category: Category) => (
-            <button
+        <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4 m-10 sm:mx-16 md:mx-24 lg:mx-32 xl:mx-64">
+          {categories.map((category: Category, index: number) => (
+            <motion.button
               key={category.id}
               onClick={() => handleCategoryClick(category.id)}
               className={`py-3 rounded-lg ${category.id === categoryId
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-100 text-gray-500 hover:text-gray-900 transition text-base"
-                }`}>
+                ? "bg-green-500 text-white"
+                : "bg-gray-100 text-gray-500 hover:text-gray-900 transition text-base"
+                }`}
+              variants={categoryVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
               {category.name}
-            </button>
+            </motion.button>
           ))}
-        </div>
-        <div className="m-10 sm:m-12 md:m-16 md:my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {foods.map((food: Food) => (
-            <div key={food.id}>
+        </motion.div>
+        <motion.div className="m-10 sm:m-12 md:m-16 md:my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {foods.map((food: Food, index: number) => (
+            <motion.div
+              key={food.id}
+              variants={foodVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 0.5, delay: index * 0.1 }}>
               <div className="flex flex-col justify-center items-center bg-white p-2 shadow rounded-lg m-4">
                 <Image
                   className="rounded-full"
@@ -85,9 +107,9 @@ function Carta() {
                 </h2>
                 <p className="mt-1">{food.price} €</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </Layout>
   );
