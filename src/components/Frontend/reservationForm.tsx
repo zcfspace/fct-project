@@ -21,7 +21,7 @@ function ReservationForm() {
 	const [showForm, setShowForm] = useState(true);
 	const [selectedTime, setSelectedTime] = useState('');
 	const [selectedNumPersonas, setSelectedNumPersonas] = useState('');
-	const { register, handleSubmit, reset, setValue,  formState: { errors } } = useForm<FormValues>();
+	const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<FormValues>();
 
 	const onSubmit: SubmitHandler<FormValues> = async data => {
 		try {
@@ -59,6 +59,12 @@ function ReservationForm() {
 		setShowForm(true);
 	};
 
+	const getAvailableHours = () => {
+		const currentHour = new Date().getHours() + 1;
+		const availableHours = Array.from({ length: 12 }, (_, i) => i + 12).filter(hour => hour > currentHour);
+		return availableHours;
+	};
+
 	return (
 		<div className="mt-12 mb-14">
 			<Toaster richColors closeButton position="top-right" />
@@ -78,7 +84,7 @@ function ReservationForm() {
 						<select {...register('time')} id="time"
 							className="mb-2 bg-gray-100 border border-gray-300 text-gray-500 text rounded-lg focus:ring-green-500 focus:border-green-500 w-96 md:w-64 p-2.5" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}>
 							<option value="">Seleccione</option>
-							{Array.from({ length: 12 }, (_, i) => i + 12).map(hour => (
+							{getAvailableHours().map(hour => (
 								<option key={hour} value={`${hour}:00`}>
 									{`${hour}:00`}
 								</option>
