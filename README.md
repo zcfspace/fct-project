@@ -17,10 +17,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 3. Create a .env file with the following environment variables:
 
     ```sh
-    GITHUB_ID=
-    GITHUB_SECRET=
+    NEXTAUTH_URL=
+    NEXTAUTH_SECRET=
+
     DATABASE_URL=
+
     OPENAI_API_KEY=
+    
     SMTP_HOST= 
     SMTP_PORT= 
     SMTP_USER=
